@@ -1,0 +1,7 @@
+{
+  "name": "budme-tu-spolu",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
