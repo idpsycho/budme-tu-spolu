@@ -1,8 +1,18 @@
 <template>
     <ion-grid>
         <router-link v-for="category in categories" :key="category.id" to="/category/{{ category.id }}" class="a-category">
-            <ion-row :style="{background:  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
+            <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
                 {{ category.name }}
+            </ion-row>
+        </router-link>
+        <router-link to="/tutorial" class="a-category">
+            <ion-row :style="{'background-color':  `#41DC63` }"  class="ion-justify-content-center  ion-align-items-center row-category">
+                Tutorial
+            </ion-row>
+        </router-link>
+        <router-link to="/my-feeds" class="a-category">
+            <ion-row :style="{'background-color':  `#19EE88` }" class="ion-justify-content-center ion-align-items-center row-category">
+                Môj Feed
             </ion-row>
         </router-link>
     </ion-grid>
@@ -40,6 +50,5 @@ export default defineComponent({
     }
     .row-category {
         width: 100%;
-        height: 25vh;
     }
 </style>
