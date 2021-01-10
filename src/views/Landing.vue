@@ -12,7 +12,7 @@
     </ion-grid>
 </template>
 
-<script lang="ts">
+<script>
 import { IonGrid, IonRow, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
