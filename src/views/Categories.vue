@@ -20,26 +20,26 @@
 
 <script>
 import { IonGrid, IonRow } from '@ionic/vue';
-import { defineComponent, onMounted, ref } from 'vue';
 import axios from 'axios';
 
-export default defineComponent({
+export default {
     name: 'Categories',
     components: {
         IonGrid,
         IonRow
     },
-    setup () {
-        const categories = ref(null);
-        
-        onMounted( () => {
-            axios.get("http://localhost:8000/api/v1/campaign/f1/categories").then(resp => {categories.value = resp.gitdata});
-        });
-        
-        return { categories }
+    data() {
+      return {
+        categories: {}
+      }
     },
-    
-});
+    created() {
+      axios.get('http://localhost:8000/api/v1/campaign/f1/categories')
+      .then(response => {
+        this.categories = response.data
+      })
+    }
+  };
 </script>
 
 <style scoped>
