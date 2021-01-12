@@ -30,14 +30,22 @@ export default {
     },
     data() {
       return {
-        categories: {}
+        categories: []
       }
     },
     created() {
-      axios.get('http://localhost:8000/api/v1/campaign/f1/categories')
-      .then(response => {
-        this.categories = response.data
-      })
+      let x = [];
+      axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/f1')
+      .then(
+        response => {response.data.forEach(element => {if (!x.includes(element.category.id)) {x.push(element.category)} }),
+          this.categories =
+          Array.from(new Set(x.map(a => a.id)))
+            .map(id => {
+            return x.find(a => a.id === id);
+          })
+
+        }
+      )
     }
   };
 </script>
