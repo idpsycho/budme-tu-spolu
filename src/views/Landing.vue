@@ -1,15 +1,15 @@
 <template>
-    <div style="display:flex;justify-content:center;align-items:center;width:100%;height:100%;">
+    <div class="center">
         <div style="width:100%;">
         <ion-grid>
             <ion-row class="ion-justify-content-center">
                 <img style="width: 80%" src="../../public/assets/LandingLogo.png" alt="LandingLogo" />
             </ion-row>
             <ion-row>
-                <ion-button style="width: 100%"  size="medium" expand="full" shape="round" color="success" href="/categories">Hrať</ion-button>
+                <ion-button style="width: 100%" class="font"  size="medium" expand="full" shape="round" color="success" href="/categories">Hrať</ion-button>
             </ion-row>
             <ion-row>
-                <ion-button style="width: 100%" size="medium" expand="full" shape="round" color="success">O appke</ion-button>
+                <ion-button style="width: 100%" class="font" size="medium" expand="full" shape="round" color="success">O appke</ion-button>
             </ion-row>
         </ion-grid>
         </div>
@@ -28,3 +28,17 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+.center {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+
+</style>
