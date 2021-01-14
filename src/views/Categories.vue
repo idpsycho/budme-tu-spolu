@@ -1,4 +1,5 @@
 <template>
+  <base-layout screen-title = "Kategórie" go-back-link="/">
     <ion-grid style="height: 100%">
         <div style="height: 60%;">
           <router-link v-for="category in categories" :key="category.id" to="/category/{{ category.id }}" class="a-category">
@@ -20,17 +21,22 @@
           </router-link>
         </div>
     </ion-grid>
+  </base-layout>
 </template>
 
 <script>
-import { IonGrid, IonRow } from '@ionic/vue';
-import axios from 'axios';
+  import {
+    IonGrid,
+    IonRow,
+  } from '@ionic/vue';
+  
+  import axios from 'axios';
 
-export default {
+  export default {
     name: 'Categories',
     components: {
-        IonGrid,
-        IonRow
+      IonGrid,
+      IonRow,
     },
     data() {
       return {
