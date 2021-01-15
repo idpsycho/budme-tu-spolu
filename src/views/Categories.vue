@@ -2,7 +2,7 @@
   <base-layout screen-title = "Kategórie" go-back-link="/">
     <ion-grid style="height: 100%">
         <div style="height: 60%;">
-          <router-link v-for="category in categories" :key="category.id" to="/category/{{ category.id }}" class="a-category">
+          <router-link v-for="category in categories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
               <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
                   {{ category.name }}
               </ion-row>
@@ -29,7 +29,7 @@
     IonGrid,
     IonRow,
   } from '@ionic/vue';
-  
+
   import axios from 'axios';
 
   export default {
@@ -43,17 +43,20 @@
         categories: []
       }
     },
-    created() {
+    mounted() {
       let x = [];
-      axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/f1')
+      axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER')
       .then(
-        response => {response.data.forEach(element => {if (!x.includes(element.category.id)) {x.push(element.category)} }),
+        response => {response.data.cards.forEach(element => {
+          if (!x.includes(element.category.id)) {
+            x.push(element.category)
+          }
+        }),
           this.categories =
           Array.from(new Set(x.map(a => a.id)))
             .map(id => {
             return x.find(a => a.id === id);
           })
-
         }
       )
     }
