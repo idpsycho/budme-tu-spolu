@@ -1,5 +1,5 @@
 <template>
-    <base-layout screen-title = "Budme-Tu-Spolu" go-back-link="/">
+    <base-layout screen-title = "Budme-Tu-Spolu">
         <div class="center">
             <div style="width: 100%;">
             <ion-grid>
@@ -10,7 +10,7 @@
                     <ion-button style="width: 100%" class="font"  size="medium" expand="full" shape="round" color="success" router-link="/categories">Hrať</ion-button>
                 </ion-row>
                 <ion-row>
-                    <ion-button style="width: 100%" class="font" size="medium" expand="full" shape="round" color="success">O appke</ion-button>
+                    <ion-button  fake  style="width: 100%" class="font" size="medium" expand="full" shape="round" color="success">O appke</ion-button>
                 </ion-row>
             </ion-grid>
             </div>
@@ -42,6 +42,9 @@ export default defineComponent({
     align-items:center;
     width:100%;
     height:100%;
+}
+[fake] {
+    opacity: 0.2 !important;
 }
 
 </style>

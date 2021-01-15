@@ -10,12 +10,12 @@
         </div>
         <div style="height: 40%; padding-top: 25%;">
           <router-link to="/tutorial" class="a-category">
-              <ion-row :style="{'background-color':  `#41DC63` }"  class="ion-justify-content-center  ion-align-items-center row-category">
+              <ion-row fake :style="{'background-color':  `#41DC63` }"  class="ion-justify-content-center  ion-align-items-center row-category">
                   Tutorial
               </ion-row>
           </router-link>
           <router-link to="/my-feeds" class="a-category">
-              <ion-row :style="{'background-color':  `#19EE88` }" class="ion-justify-content-center ion-align-items-center row-category">
+              <ion-row fake :style="{'background-color':  `#19EE88` }" class="ion-justify-content-center ion-align-items-center row-category">
                   Môj Feed
               </ion-row>
           </router-link>
@@ -78,4 +78,7 @@
     height: 25%;
     margin: 10px;
   }
+  [fake] {
+    opacity: 0.2;
+}
 </style>

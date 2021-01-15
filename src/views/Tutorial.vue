@@ -13,7 +13,7 @@
     </ion-grid>
 </template>
 
-<script lang="ts">
+<script>
 import { IonGrid, IonRow, IonButton, IonDatetime } from '@ionic/vue';
 import { defineComponent, onMounted } from 'vue';
 import { Plugins } from '@capacitor/core';
