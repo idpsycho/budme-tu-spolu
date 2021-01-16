@@ -10,7 +10,7 @@
                     <ion-button style="width: 100%" class="font"  size="medium" expand="full" shape="round" color="success" router-link="/categories">Hrať</ion-button>
                 </ion-row>
                 <ion-row>
-                    <ion-button  fake  style="width: 100%" class="font" size="medium" expand="full" shape="round" color="success">O appke</ion-button>
+                    <ion-button href="{{ link }}" fake  style="width: 100%" class="font" size="medium" expand="full" shape="round" color="success">O appke</ion-button>
                 </ion-row>
             </ion-grid>
             </div>
@@ -28,6 +28,11 @@ export default defineComponent({
     IonButton,
     IonGrid,
     IonRow
+  },
+  data(){
+      return {
+          link: 'http://www.dum-umeni.cz/',
+    }
   }
 });
 </script>

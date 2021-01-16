@@ -9,7 +9,7 @@
           </router-link>
         </div>
         <div style="height: 40%; padding-top: 25%;">
-          <router-link to="/tutorial" class="a-category">
+          <router-link to="/categories/tutorial" class="a-category">
               <ion-row fake :style="{'background-color':  `#41DC63` }"  class="ion-justify-content-center  ion-align-items-center row-category">
                   Tutorial
               </ion-row>
@@ -28,9 +28,11 @@
   import {
     IonGrid,
     IonRow,
+    IonButton,
   } from '@ionic/vue';
 
   import axios from 'axios';
+  //import { IonButton } from '@ionic/vue';
 
   export default {
     name: 'Categories',

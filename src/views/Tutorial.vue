@@ -1,4 +1,5 @@
 <template>
+  <base-layout go-back-link = "/categories">
     <ion-grid>
         <ion-row class="ion-justify-content-center">
             <img style="width: 80%" src="../../public/assets/LandingLogo.png" alt="LandingLogo" />
@@ -11,6 +12,7 @@
               <ion-progress-bar value="0.25"></ion-progress-bar>
         </ion-row>
     </ion-grid>
+  </base-layout>
 </template>
 
 <script>

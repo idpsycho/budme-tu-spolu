@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Landing from '../views/Landing.vue';
 import Categories from '../views/Categories.vue';
 import Cards from '../views/Cards.vue';
+import Tutorial from '../views/Tutorial.vue';
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     path: '/categories/:categoryId/cards',
     name: 'Cards',
     component: Cards
+  },
+  {
+    path: '/categories/tutorial',
+    name: 'Tutorial',
+    component: Tutorial
+  
   }
 ]
 
