@@ -4,7 +4,7 @@ import Categories from '../views/Categories.vue';
 import Cards from '../views/Cards.vue';
 import Tutorial from '../views/Tutorial.vue';
 //import Storybehind from '../views/StoryBehind.vue';
-import Test from '../views/Test.vue';
+// import Test from '../views/Test.vue';
 
 const routes = [
   {
@@ -31,11 +31,11 @@ const routes = [
     // path: '/categories/:categoryId/cards/storybehind',
     // name: 'Storybehind',
     // component: Storybehind
-  {
-    path: '/test',
-    name: 'test',
-    component: Test
-  },
+  // {
+  //   path: '/test',
+  //   name: 'test',
+  //   component: Test
+  // },
 
   
 ]

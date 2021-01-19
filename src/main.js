@@ -2,7 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import baselayout from './components/baselayout.vue';
 import router from './router';
-import store from './store';
+import { Plugins } from '@capacitor/core';
+
+const { Storage } = Plugins;
 
 import { IonicVue } from '@ionic/vue';
 
@@ -25,16 +27,16 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import axios from 'axios';
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  .use(store);
 
 app.component('base-layout', baselayout);
 
 router.isReady().then(() => {
-  //store,
+  axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER').then(response => { Storage.set({ key: 'CampaignData', value: JSON.stringify(response.data) }) });
   app.mount('#app');
 });
 

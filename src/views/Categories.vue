@@ -2,7 +2,7 @@
   <base-layout screen-title = "Kategórie" go-back-link="/">
     <ion-grid style="height: 100%">
         <div style="height: 60%;">
-          <router-link v-for="category in allCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
+          <router-link v-for="category in categories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
               <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
                   {{ category.name }}
               </ion-row>
@@ -30,10 +30,9 @@
     IonRow,
     IonButton,
   } from '@ionic/vue';
+import { Plugins } from '@capacitor/core';
 
-  import axios from 'axios';
-  import { mapGetters, mapActions } from 'vuex';
-  //import { IonButton } from '@ionic/vue'; - no need, the base-layout component has it
+const { Storage } = Plugins;
 
   export default {
     name: 'Categories',
@@ -43,34 +42,26 @@
     },
     data() {
       return {
-        //categories: []
+        categories: []
       }
     },
-    // async mounted() {
-    //   let x = [];
-    //   const response = await axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER')
-    //   .then(
-    //     response => {response.data.cards.forEach(element => {
-    //       if (!x.includes(element.category.id)) {
-    //         x.push(element.category)
-    //       }
-    //     }),
-    //       this.categories =
-    //       Array.from(new Set(x.map(a => a.id)))
-    //         .map(id => {
-    //         return x.find(a => a.id=== id);
-    //       })
-    //     }
-    //   )
-    // },
-    methods: {
-      ...mapActions(['getCategories'])
-    },
-    computed: {
-      ...mapGetters(['allCategories'])
-    },
-    created(){
-      this.getCategories();
+    async mounted() {
+      let x = [];
+      Storage.get({ key: 'CampaignData' })
+      .then(
+        response => {response = JSON.parse(response.value).data;
+          response.cards.forEach(element => {
+          if (!x.includes(element.category.id)) {
+            x.push(element.category)
+          }
+        }),
+          this.categories =
+          Array.from(new Set(x.map(a => a.id)))
+            .map(id => {
+            return x.find(a => a.id=== id);
+          })
+        }
+      )
     },
   };
 </script>
