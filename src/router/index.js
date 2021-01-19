@@ -3,6 +3,7 @@ import Landing from '../views/Landing.vue';
 import Categories from '../views/Categories.vue';
 import Cards from '../views/Cards.vue';
 import Tutorial from '../views/Tutorial.vue';
+import Nextdeck from '../views/Nextdeck.vue'; 
 //import Storybehind from '../views/StoryBehind.vue';
 // import Test from '../views/Test.vue';
 
@@ -27,6 +28,12 @@ const routes = [
     name: 'Tutorial',
     component: Tutorial
   },
+  {
+    path: '/nextdeck', //neviem aky nazov dat tomuto screenu (Je to screen 5. Deck moznost)
+    name: 'Nextdeck',
+    component: Nextdeck
+  },
+
   
     // path: '/categories/:categoryId/cards/storybehind',
     // name: 'Storybehind',
