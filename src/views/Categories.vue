@@ -2,7 +2,7 @@
   <base-layout screen-title = "Kategórie" go-back-link="/">
     <ion-grid style="height: 100%">
         <div style="height: 60%;">
-          <router-link v-for="category in categories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
+          <router-link v-for="category in allCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
               <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
                   {{ category.name }}
               </ion-row>
@@ -10,7 +10,7 @@
         </div>
         <div style="height: 40%; padding-top: 25%;">
           <router-link to="/categories/tutorial" class="a-category">
-              <ion-row fake :style="{'background-color':  `#41DC63` }"  class="ion-justify-content-center  ion-align-items-center row-category">
+              <ion-row fake kfja :style="{'background-color':  `#41DC63` }"  class="ion-justify-content-center  ion-align-items-center row-category">
                   Tutorial
               </ion-row>
           </router-link>
@@ -32,7 +32,8 @@
   } from '@ionic/vue';
 
   import axios from 'axios';
-  //import { IonButton } from '@ionic/vue';
+  import { mapGetters, mapActions } from 'vuex';
+  //import { IonButton } from '@ionic/vue'; - no need, the base-layout component has it
 
   export default {
     name: 'Categories',
@@ -42,26 +43,35 @@
     },
     data() {
       return {
-        categories: []
+        //categories: []
       }
     },
-    mounted() {
-      let x = [];
-      axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER')
-      .then(
-        response => {response.data.cards.forEach(element => {
-          if (!x.includes(element.category.id)) {
-            x.push(element.category)
-          }
-        }),
-          this.categories =
-          Array.from(new Set(x.map(a => a.id)))
-            .map(id => {
-            return x.find(a => a.id === id);
-          })
-        }
-      )
-    }
+    // async mounted() {
+    //   let x = [];
+    //   const response = await axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER')
+    //   .then(
+    //     response => {response.data.cards.forEach(element => {
+    //       if (!x.includes(element.category.id)) {
+    //         x.push(element.category)
+    //       }
+    //     }),
+    //       this.categories =
+    //       Array.from(new Set(x.map(a => a.id)))
+    //         .map(id => {
+    //         return x.find(a => a.id=== id);
+    //       })
+    //     }
+    //   )
+    // },
+    methods: {
+      ...mapActions(['getCategories'])
+    },
+    computed: {
+      ...mapGetters(['allCategories'])
+    },
+    created(){
+      this.getCategories();
+    },
   };
 </script>
 

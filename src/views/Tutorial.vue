@@ -34,14 +34,14 @@ export default defineComponent({
     IonRow,
     IonDatetime
   },
-  setup() {
-    onMounted( () => {
-      const { Storage } = Plugins
-      Storage.set({
-        key: 'test',
-        value: "test"
-      })
-    });
-  }
+  // setup() {
+  //   onMounted( () => {
+  //     const { Storage } = Plugins
+  //     Storage.set({
+  //       key: 'test',
+  //       value: "test"
+  //     })
+  //   });
+  // }
 });
 </script>

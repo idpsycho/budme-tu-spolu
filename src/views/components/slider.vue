@@ -5,7 +5,7 @@
   @ionSlideDidChange="onSliderChanged"
   >
 
-    <ion-slide v-for="card of cards" :key="card.id" :style="{'background-color':  card.category.color }">
+    <ion-slide v-for="card of renderedCards" :key="card.id" :style="{'background-color':  card.category.color }">
       {{card.id}}<br/>
       {{card.description}}<br/>
       {{card.hashtag}}<br/>
@@ -42,6 +42,7 @@ export default {
           this.cards[this.currentCard+1],
           this.cards[this.currentCard],
           this.cards[this.currentCard+1],
+
         ];
 
         return cards;
@@ -49,6 +50,7 @@ export default {
   },
   methods: {
     async onSliderChanged(event) {
+     
       const sliderIndex = await event.target.getActiveIndex();
       console.log(sliderIndex);
 
@@ -57,7 +59,9 @@ export default {
         event.target.slideTo(1);
         event.target.update();
       }
+
       if (sliderIndex == 2) {
+
         this.currentCard++;
         event.target.slideTo(1);
         event.target.update();
