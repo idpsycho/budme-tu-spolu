@@ -36,7 +36,7 @@ const app = createApp(App)
 app.component('base-layout', baselayout);
 
 router.isReady().then(() => {
-  axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER').then(response => { Storage.set({ key: 'CampaignData', value: JSON.stringify(response.data) }) });
+  axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER').then(response => { Storage.set({ key: 'campaignData', value: JSON.stringify(response.data) }) });
   app.mount('#app');
 });
 

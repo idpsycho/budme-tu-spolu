@@ -3,9 +3,10 @@
   pager="true"
   :options="{initialSlide: 1}"
   @ionSlideDidChange="onSliderChanged"
+  v-if="cards != null"
   >
 
-    <ion-slide v-for="card of renderedCards" :key="card.id" :style="{'background-color':  card.category.color }">
+    <ion-slide v-for="(card, i) of renderedCards" :key="i" :style="{'background-color':  card.category.color }">
       {{card.id}}<br/>
       {{card.description}}<br/>
       {{card.hashtag}}<br/>
@@ -18,6 +19,9 @@
 <script>
 import axios from 'axios'
 import { IonSlides, IonSlide } from '@ionic/vue';
+import { Plugins } from '@capacitor/core';
+
+const { Storage } = Plugins;
 
 export default {
   name: 'slider',
@@ -27,24 +31,26 @@ export default {
   },
   data() {
     return {
-      cards: [],
+      cards: null,
       categoryId: this.$route.params.categoryId,
       currentCard: 0,
     }
   },
-  mounted() {
-      axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER')
-      .then(response => {this.cards = response.data.cards.filter(element => element.category_id == this.categoryId) });
+  async mounted() {
+      await Storage.get({ key: 'campaignData' })
+      .then(response => {response = JSON.parse(response.value).data; this.cards = response.cards.filter(element => element.category.id == this.categoryId) });
   },
   computed: {
       renderedCards() {
+        if (this.cards[this.currentCard+1] == null) {
+          return;
+        }
         let cards = [
-          this.cards[this.currentCard+1],
-          this.cards[this.currentCard],
-          this.cards[this.currentCard+1],
-
+          Object.assign({}, this.cards[this.currentCard+1]),
+          Object.assign({}, this.cards[this.currentCard]),
+          Object.assign({}, this.cards[this.currentCard+1]),
         ];
-
+        
         return cards;
       }
   },
@@ -52,20 +58,31 @@ export default {
     async onSliderChanged(event) {
      
       const sliderIndex = await event.target.getActiveIndex();
-      console.log(sliderIndex);
-
-      if (sliderIndex == 0) {
-        this.currentCard++;
-        event.target.slideTo(1);
-        event.target.update();
-      }
-
+    
       if (sliderIndex == 2) {
-
-        this.currentCard++;
-        event.target.slideTo(1);
-        event.target.update();
+        this.nextSlide(event);
       }
+      if (sliderIndex == 0) {
+        this.nextSlide(event);
+      }
+
+      if (this.cards[this.currentCard+1] == null) {
+          let doneCategories = [];
+          await Storage.get({key: 'isCategoryDone'}).then(resp => {doneCategories.push(resp.value)});
+          if (doneCategories[0] == null) {
+            doneCategories.pop()
+          }
+          console.log(doneCategories)
+          doneCategories.push(parseInt(this.categoryId));
+          await Storage.set({key: 'isCategoryDone', value: doneCategories})
+          this.$router.push({name: 'Categories'})
+        }
+      
+    },
+    async nextSlide(event) {
+      event.target.slideTo(1);
+      event.target.update();
+      this.currentCard++;
     }
   }
 }
