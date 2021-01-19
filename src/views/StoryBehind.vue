@@ -1,19 +1,23 @@
 <template>
     <base-layout screen-title = "Story Behind" go-back-link="/">
-    <ion-grid style="height: 100%">  
-              <ion-row class="ion-justify-content-center ion-align-items-center row-category">
-                <ion-card>
-                  <ion-card-header>
-                    <img style="width: 100%" src="../../public/assets/Test.jpg" alt="LandingLogo" />
-                    <ion-card-title style="text-align:center; margin-top: 5px;">Bratislava Castle</ion-card-title>
-                  </ion-card-header>
+    <div style="display:flex;justify-content:center;align-items:center;width:100%;">
+      <div style="height:100%">
+        <ion-grid>  
+                  <ion-row>
+                    <ion-card>
+                      <ion-card-header>
+                        <img style="width: 100%" src="../../public/assets/LandingLogo.png" alt="LandingLogo" />
+                        <ion-card-title style="text-align:center; margin-top: 5px;">Random Title</ion-card-title>
+                      </ion-card-header>
 
-                  <ion-card-content>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ipsum massa, convallis lobortis diam non, tincidunt convallis dolor. Quisque ultricies lacus at condimentum maximus. Phasellus lectus massa, eleifend id elit nec, commodo sollicitudin purus. In ex mauris, venenatis nec ipsum et, dignissim porta sapien.
-                  </ion-card-content>
-                </ion-card>
-              </ion-row>
-    </ion-grid>
+                      <ion-card-content>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ipsum massa, convallis lobortis diam non, tincidunt convallis dolor. Quisque ultricies lacus at condimentum maximus. Phasellus lectus massa, eleifend id elit nec, commodo sollicitudin purus. In ex mauris, venenatis nec ipsum et, dignissim porta sapien.
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-row>
+        </ion-grid>
+      </div>
+    </div>
     </base-layout>
 </template>
 
