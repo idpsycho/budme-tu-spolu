@@ -47,13 +47,17 @@ const { Storage } = Plugins;
     },
     async mounted() {
       let x = [];
-      Storage.get({ key: 'CampaignData' })
+      let doneCategories = [];
+      await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(',') }})
+      await Storage.get({ key: 'campaignData' })
       .then(
         response => {response = JSON.parse(response.value).data;
           response.cards.forEach(element => {
-          if (!x.includes(element.category.id)) {
-            x.push(element.category)
-          }
+            if (!doneCategories.includes(element.category.id)) {
+              if (!x.includes(element.category.id)) {
+                x.push(element.category)
+              }
+            }
         }),
           this.categories =
           Array.from(new Set(x.map(a => a.id)))
