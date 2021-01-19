@@ -1,0 +1,42 @@
+<template>
+    <base-layout screen-title = "Story Behind" go-back-link="/">
+    <ion-grid style="height: 100%">  
+              <ion-row class="ion-justify-content-center ion-align-items-center row-category">
+                <ion-card>
+                  <ion-card-header>
+                    <img style="width: 100%" src="../../public/assets/Test.jpg" alt="LandingLogo" />
+                    <ion-card-title style="text-align:center; margin-top: 5px;">Bratislava Castle</ion-card-title>
+                  </ion-card-header>
+
+                  <ion-card-content>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ipsum massa, convallis lobortis diam non, tincidunt convallis dolor. Quisque ultricies lacus at condimentum maximus. Phasellus lectus massa, eleifend id elit nec, commodo sollicitudin purus. In ex mauris, venenatis nec ipsum et, dignissim porta sapien.
+                  </ion-card-content>
+                </ion-card>
+              </ion-row>
+    </ion-grid>
+    </base-layout>
+</template>
+
+<script>
+import { IonGrid, IonRow } from '@ionic/vue';
+import { IonCard, IonCardContent, IonCardTitle } from '@ionic/vue';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'Storybehind',
+  components: {
+    IonGrid,
+    IonRow,
+    IonCard,
+    IonCardContent, 
+    IonCardTitle, 
+
+  }
+});
+</script>
+
+<style scoped>
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+</style>

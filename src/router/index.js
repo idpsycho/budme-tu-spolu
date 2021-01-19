@@ -3,6 +3,8 @@ import Landing from '../views/Landing.vue';
 import Categories from '../views/Categories.vue';
 import Cards from '../views/Cards.vue';
 import Tutorial from '../views/Tutorial.vue';
+//import Storybehind from '../views/StoryBehind.vue';
+import Test from '../views/Test.vue';
 
 const routes = [
   {
@@ -24,8 +26,18 @@ const routes = [
     path: '/categories/tutorial',
     name: 'Tutorial',
     component: Tutorial
+  },
   
-  }
+    // path: '/categories/:categoryId/cards/storybehind',
+    // name: 'Storybehind',
+    // component: Storybehind
+  {
+    path: '/test',
+    name: 'test',
+    component: Test
+  },
+
+  
 ]
 
 const router = createRouter({
@@ -33,4 +45,4 @@ const router = createRouter({
   routes
 })
 
-export default router
+export default router;
