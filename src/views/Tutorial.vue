@@ -9,7 +9,7 @@
         </ion-row>
             <ion-datetime display-format="DDDD MMM D, YYYY"></ion-datetime>
         <ion-row class="ion-justify-content-center">
-              <ion-progress-bar value="0.25"></ion-progress-bar>
+              <ion-progress-bar value="0.25" class="progress-bar"></ion-progress-bar>
         </ion-row>
     </ion-grid>
   </base-layout>
@@ -45,3 +45,12 @@ export default defineComponent({
   // }
 });
 </script>
+
+<style scoped>
+
+.progress-bar {
+  height: 2vmax;
+  border-radius: 25px;
+}
+
+</style>
