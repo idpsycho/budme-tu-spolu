@@ -10,7 +10,7 @@
                     <ion-button color="success" size="large" style="font-size: 3vmax; margin: 25px; max-width: 98%">Vrátiť sa k nevyplneným kartám</ion-button>
                 </ion-row>
                 <ion-row class="ion-justify-content-center">
-                    <ion-button color="success" size="large" style="font-size: 3vmax; margin: 10px;">Pokračovať</ion-button>  
+                    <ion-button @click="Continue()" color="success" size="large" style="font-size: 3vmax; margin: 10px;">Pokračovať</ion-button>  
                 </ion-row>
             </ion-grid>
             </div>
@@ -22,6 +22,9 @@
 <script>
 import { IonGrid, IonRow, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import { Plugins } from '@capacitor/core';
+
+const { Storage } = Plugins;
 
 export default defineComponent({
   name: 'Landing',
@@ -29,6 +32,14 @@ export default defineComponent({
     IonButton,
     IonGrid,
     IonRow
+  },
+  methods: {
+      async Continue() {
+          await Storage.remove({key: 'isCategoryDone'});
+          await Storage.remove({key: 'isCardAccepted'});
+          await Storage.remove({key: 'isCardDeclined'});
+          this.$router.push({name: 'Categories'});
+      }
   },
  
 

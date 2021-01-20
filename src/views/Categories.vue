@@ -48,24 +48,31 @@ const { Storage } = Plugins;
     async mounted() {
       let x = [];
       let doneCategories = [];
-      await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(',') }})
+      await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(','); }})
+      
+      doneCategories = doneCategories.map(el=>parseInt(el));
+
       await Storage.get({ key: 'campaignData' })
       .then(
         response => {response = JSON.parse(response.value).data;
           response.cards.forEach(element => {
-            if (!doneCategories.includes(element.category.id)) {
-              if (!x.includes(element.category.id)) {
-                x.push(element.category)
+              if (!doneCategories.includes(element.category.id)) {
+                if (!x.includes(element.category.id)) {
+                  x.push(element.category)
+                }
               }
-            }
-        }),
-          this.categories =
-          Array.from(new Set(x.map(a => a.id)))
-            .map(id => {
-            return x.find(a => a.id=== id);
-          })
+            });
+            this.categories =
+              Array.from(new Set(x.map(a => a.id)))
+              .map(id => {
+              return x.find(a => a.id === id);
+            });
+          }
+        )
+        
+        if (this.categories[0] == null) {  
+          this.$router.push({name: 'Nextdeck'})
         }
-      )
     },
   };
 </script>

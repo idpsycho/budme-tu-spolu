@@ -33,6 +33,7 @@ export default {
     return {
       cards: null,
       categoryId: this.$route.params.categoryId,
+      lastSlide: 0,
       currentCard: 0,
     }
   },
@@ -43,7 +44,13 @@ export default {
   computed: {
       renderedCards() {
         if (this.cards[this.currentCard+1] == null) {
-          return;
+          let cards = [
+            Object.assign({}, this.cards[this.currentCard]),
+          ];
+
+          this.lastSlide++;
+          
+          return cards;
         }
         let cards = [
           Object.assign({}, this.cards[this.currentCard+1]),
@@ -60,14 +67,19 @@ export default {
       const sliderIndex = await event.target.getActiveIndex();
     
       if (sliderIndex == 2) {
-        this.nextSlide(event);
+        this.nextSlide(event, 2);
       }
+      
       if (sliderIndex == 0) {
-        this.nextSlide(event);
+        this.nextSlide(event, 0);
       }
 
-      if (this.cards[this.currentCard+1] == null) {
-          let doneCategories = [];
+      if (this.lastSlide == 1) {
+        this.nextCategory
+      }
+    },
+    async nextCategory() {
+      let doneCategories = [];
           await Storage.get({key: 'isCategoryDone'}).then(resp => {doneCategories.push(resp.value)});
           if (doneCategories[0] == null) {
             doneCategories.pop()
@@ -76,14 +88,41 @@ export default {
           doneCategories.push(parseInt(this.categoryId));
           await Storage.set({key: 'isCategoryDone', value: doneCategories})
           this.$router.push({name: 'Categories'})
-        }
-      
     },
-    async nextSlide(event) {
+    async nextSlide(event, swipeSide) {
+      this.swipeSidePush(swipeSide)
       event.target.slideTo(1);
       event.target.update();
       this.currentCard++;
+    },
+    async swipeSidePush(swipeSide) {
+      if (swipeSide == 0) {
+        let cards = [];
+        await Storage.get({key: 'isCardAccepted'}).then(resp => {cards.push(resp.value)});
+        if (cards[0] == null) {
+          cards.pop()
+        }
+        
+        cards.push(parseInt(this.cards[this.currentCard].id));
+        await Storage.set({key: 'isCardAccepted', value: cards})
+      }
+
+
+      if (swipeSide == 2) {
+        let cards = [];
+        await Storage.get({key: 'isCardDeclined'}).then(resp => {cards.push(resp.value)});
+        if (cards[0] == null) {
+          cards.pop()
+        }
+        
+        cards.push(parseInt(this.cards[this.currentCard].id));
+        await Storage.set({key: 'isCardDeclined', value: cards})
+      }
+      
     }
   }
 }
+
+// 0 = Fajka
+// 2 = Krizik
 </script>
