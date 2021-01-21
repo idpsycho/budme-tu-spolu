@@ -1,19 +1,16 @@
 <template>
   <ion-slides
-  pager="true"
+  pager="false"
   :options="{initialSlide: 1}"
   @ionSlideDidChange="onSliderChanged"
   v-if="cards != null"
   >
-
     <ion-slide v-for="(card, i) of renderedCards" :key="i" :style="{'background-color':  card.category.color }">
       {{card.id}}<br/>
       {{card.description}}<br/>
       {{card.hashtag}}<br/>
     </ion-slide>
-
   </ion-slides>
-
 </template>
 
 <script>
@@ -33,7 +30,6 @@ export default {
     return {
       cards: null,
       categoryId: this.$route.params.categoryId,
-      lastSlide: 0,
       currentCard: 0,
     }
   },
@@ -46,12 +42,13 @@ export default {
         if (this.cards[this.currentCard+1] == null) {
           let cards = [
             Object.assign({}, this.cards[this.currentCard]),
+            Object.assign({}, this.cards[this.currentCard]),
+            Object.assign({}, this.cards[this.currentCard]),
           ];
-
-          this.lastSlide++;
           
           return cards;
         }
+        
         let cards = [
           Object.assign({}, this.cards[this.currentCard+1]),
           Object.assign({}, this.cards[this.currentCard]),
@@ -65,29 +62,31 @@ export default {
     async onSliderChanged(event) {
      
       const sliderIndex = await event.target.getActiveIndex();
-    
+      const swiper = await event.target.getSwiper();
+      
       if (sliderIndex == 2) {
         this.nextSlide(event, 2);
+        if (this.cards[this.currentCard+1] == null) {
+          swiper.on('sliderMove', this.nextCategory())
+        }
       }
       
       if (sliderIndex == 0) {
         this.nextSlide(event, 0);
-      }
-
-      if (this.lastSlide == 1) {
-        this.nextCategory
+        if (this.cards[this.currentCard+1] == null) {
+          swiper.on('sliderMove', this.nextCategory())
+        }
       }
     },
     async nextCategory() {
       let doneCategories = [];
-          await Storage.get({key: 'isCategoryDone'}).then(resp => {doneCategories.push(resp.value)});
-          if (doneCategories[0] == null) {
-            doneCategories.pop()
-          }
-          console.log(doneCategories)
-          doneCategories.push(parseInt(this.categoryId));
-          await Storage.set({key: 'isCategoryDone', value: doneCategories})
-          this.$router.push({name: 'Categories'})
+      await Storage.get({key: 'isCategoryDone'}).then(resp => {doneCategories.push(resp.value)});
+      if (doneCategories[0] == null) {
+        doneCategories.pop()
+      }
+      doneCategories.push(parseInt(this.categoryId));
+      await Storage.set({key: 'isCategoryDone', value: doneCategories})
+      this.$router.push({name: 'Categories'})
     },
     async nextSlide(event, swipeSide) {
       this.swipeSidePush(swipeSide)
@@ -114,7 +113,7 @@ export default {
         if (cards[0] == null) {
           cards.pop()
         }
-        
+
         cards.push(parseInt(this.cards[this.currentCard].id));
         await Storage.set({key: 'isCardDeclined', value: cards})
       }
