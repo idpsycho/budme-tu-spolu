@@ -1,7 +1,7 @@
 <template>
   
   <ion-item v-for="category in categories" :key="category.id">
-      <ion-progress-bar :value="category.value"></ion-progress-bar>
+      <ion-progress-bar :value="category.value" :style="{ '--progress-background': category.color, '--background': 'lightgray' }"></ion-progress-bar>
   </ion-item>
 
 </template>
@@ -32,7 +32,6 @@ export default {
     await Storage.get({ key: 'campaignData' })
       .then(
         response => {response = JSON.parse(response.value).data;
-        this.allCards = response.cards;
         response.cards.forEach(element => {
             if (!x.includes(element.category.id)) {
                 x.push(element.category)
@@ -73,7 +72,7 @@ export default {
             
         }
         console.log(y.length)
-        this.categories[i].value = (this.categories[i].allCardsValue / 100) * y.length
+        this.categories[i].value = ((100 / this.categories[i].allCardsValue)  * y.length) / 100;
         
         // y = []
       }
