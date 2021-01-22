@@ -5,6 +5,9 @@
   @ionSlideDidChange="onSliderChanged"
   v-if="cards != null"
   >
+
+  <!-- Pozriet si dokumentaciu a mozno pouzit nieco ine ako slider -->
+  <!-- Spravit to bez effektov, iba klikanie na button, uplne bez slideru!!! -->
     <ion-slide v-for="(card, i) of renderedCards" :key="i" :style="{'background-color':  card.category.color }">
       {{card.id}}<br/>
       {{card.description}}<br/>

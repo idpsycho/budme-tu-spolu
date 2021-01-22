@@ -8,6 +8,8 @@ const { Storage } = Plugins;
 
 import { IonicVue } from '@ionic/vue';
 
+//base-layout tu nebude, pouzit vue-layout
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -34,7 +36,10 @@ const app = createApp(App)
   .use(router)
 
 app.component('base-layout', baselayout);
-
+// Url tahat z .env (bez url)
+// Storage je na to aby mi nieco zostalo po refreshy
+// Treba spravit na to $store 
+// Pozriet si Open-Academy kurz na Vue $store (Vue 2)
 router.isReady().then(() => {
   axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER').then(response => { Storage.set({ key: 'campaignData', value: JSON.stringify(response.data) }) });
   app.mount('#app');

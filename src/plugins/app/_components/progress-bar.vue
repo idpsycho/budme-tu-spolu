@@ -29,26 +29,22 @@ export default {
       let x = [];
 
       //This get all data about campaign and filter categories
-    await Storage.get({ key: 'campaignData' })
-      .then(
-        response => {response = JSON.parse(response.value).data;
-        response.cards.forEach(element => {
-            if (!x.includes(element.category.id)) {
-                x.push(element.category)
-            }
-        });
-        this.categories =
-          Array.from(new Set(x.map(a => a.id)))
-          .map(id => {
-          return x.find(a => a.id === id);
-        });
+      let response = await Storage.get({ key: 'campaignData' })
+      response = JSON.parse(response.value).data;
+      response.cards.forEach(element => {
+          if (!x.includes(element.category.id)) {
+              x.push(element.category)
+          }
       });
-
+      this.categories =
+        Array.from(new Set(x.map(a => a.id)))
+        .map(id => {
+        return x.find(a => a.id === id);
+      });
+      
+      //This set progress bar value
       for(let i = 0; i <= this.categories.length - 1; i++) {
         let z = null;
-        
-        let response = await Storage.get({ key: 'campaignData' })
-        response = JSON.parse(response.value).data;
         this.categories[i].allCardsValue = response.cards.filter(element => element.category.id == this.categories[i].id).length;
         
 
@@ -60,21 +56,15 @@ export default {
         this.allCardsIds = this.allCardsIds.map(el=>parseInt(el));
         this.allCardsIds = this.allCardsIds.sort();
 
-        // cards.id in this.allCardsIds and belongs to this.categories[i].id
         let y = [];
-        console.log(this.allCardsIds)
         for (let j = 0; j <= this.allCardsIds.length - 1; j++) {        
-          // let allcardsIds = this.allCardsIds;
           response.cards.forEach(el => 
           { if (el.id == this.allCardsIds[j] && el.category.id == this.categories[i].id) {
             y.push([]);
           }})
             
         }
-        console.log(y.length)
         this.categories[i].value = ((100 / this.categories[i].allCardsValue)  * y.length) / 100;
-        
-        // y = []
       }
   }
 }

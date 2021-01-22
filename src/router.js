@@ -4,9 +4,9 @@ import Categories from '../views/Categories.vue';
 import Cards from '../views/Cards.vue';
 import Tutorial from '../views/Tutorial.vue';
 import Nextdeck from '../views/Nextdeck.vue'; 
-//import Storybehind from '../views/StoryBehind.vue';
-// import Test from '../views/Test.vue';
 
+
+//Zmenit zapis na vid. categories, pouzit router layout
 const routes = [
   {
     path: '/',
@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/categories',
     name: 'Categories',
-    component: Categories,
+    component: () => import ('../views/Categories.vue'),
   },
   {
     path: '/categories/:categoryId/cards',
@@ -33,18 +33,6 @@ const routes = [
     name: 'Nextdeck',
     component: Nextdeck
   },
-
-  
-    // path: '/categories/:categoryId/cards/storybehind',
-    // name: 'Storybehind',
-    // component: Storybehind
-  // {
-  //   path: '/test',
-  //   name: 'test',
-  //   component: Test
-  // },
-
-  
 ]
 
 const router = createRouter({

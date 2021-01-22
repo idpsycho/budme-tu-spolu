@@ -21,20 +21,16 @@
 <script>
 import { IonGrid, IonRow, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'Landing',
+//defineComponents  nedavat !!!, name tiez
+//Font je globalny treba dat do theme
+//Fake globalny
+export default {
   components: {
     IonButton,
     IonGrid,
     IonRow
   },
-  data(){
-      return {
-          link: 'http://beentheretogether.cards',
-    }
-  }
-});
+};
 </script>
 
 <style scoped>

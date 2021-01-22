@@ -1,4 +1,5 @@
 <template>
+<!-- Pozriet vue-layout package -->
   <base-layout screen-title = "Kategórie" go-back-link="/">
     <ion-grid style="height: 100%">
         <div style="height: 60%;">
@@ -31,7 +32,11 @@
     IonButton,
   } from '@ionic/vue';
 import { Plugins } from '@capacitor/core';
-
+//Nepouzivat storage v komponentoch, treba spravit ten $store
+// IonGrid a row includnut globalne (v main.js)
+// ; do prdele
+// ODPORUCANIE: w@tip/no-semis
+// Spravit si funkcie do $storu, napr. get cardsByCategory()
 const { Storage } = Plugins;
 
   export default {
