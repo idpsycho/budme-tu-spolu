@@ -27,8 +27,8 @@
 
 <script>
   import {
-    IonGrid,
-    IonRow,
+    //IonGrid,
+    //IonRow,
     IonButton,
   } from '@ionic/vue'
 import { Plugins } from '@capacitor/core'
@@ -42,8 +42,8 @@ const { Storage } = Plugins;
   export default {
     name: 'Categories',
     components: {
-      IonGrid,
-      IonRow,
+      //IonGrid,
+      //IonRow,
     },
     data() {
       return {

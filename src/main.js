@@ -3,6 +3,7 @@ import App from './App.vue'
 import baselayout from '@/plugins/app/_layout/baselayout.vue'
 import router from './router'
 import { Plugins } from '@capacitor/core'
+import { IonGrid, IonRow } from '@ionic/vue'
 
 const { Storage } = Plugins
 
@@ -30,12 +31,15 @@ import '@ionic/vue/css/display.css'
 /* Theme variables */
 import './plugins/app/theme/variables.css'
 import axios from 'axios'
+import { from } from 'core-js/fn/array'
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
 
 app.component('base-layout', baselayout)
+app.component('ion-grid', IonGrid)
+app.component('ion-row', IonRow)
 // Url tahat z .env (bez url)
 // Storage je na to aby mi nieco zostalo po refreshy
 // Treba spravit na to $store 
