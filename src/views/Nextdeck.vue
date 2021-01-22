@@ -20,11 +20,11 @@
 
 
 <script>
-import { IonGrid, IonRow, IonButton } from '@ionic/vue';
-import { defineComponent } from 'vue';
-import { Plugins } from '@capacitor/core';
+import { IonGrid, IonRow, IonButton } from '@ionic/vue'
+import { defineComponent } from 'vue'
+import { Plugins } from '@capacitor/core'
 
-const { Storage } = Plugins;
+const { Storage } = Plugins
 
 export default defineComponent({
   name: 'Landing',
@@ -35,10 +35,10 @@ export default defineComponent({
   },
   methods: {
       async Continue() {
-          await Storage.remove({key: 'isCategoryDone'});
-          await Storage.remove({key: 'isCardAccepted'});
-          await Storage.remove({key: 'isCardDeclined'});
-          this.$router.push({name: 'Categories'});
+          await Storage.remove({key: 'isCategoryDone'})
+          await Storage.remove({key: 'isCardAccepted'})
+          await Storage.remove({key: 'isCardDeclined'})
+          this.$router.push({name: 'Categories'})
       }
   },
  

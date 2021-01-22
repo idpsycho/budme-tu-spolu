@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import { IonGrid, IonRow, IonButton, IonDatetime } from '@ionic/vue';
-import { defineComponent, onMounted } from 'vue';
-import { Plugins } from '@capacitor/core';
+import { IonGrid, IonRow, IonButton, IonDatetime } from '@ionic/vue'
+import { defineComponent, onMounted } from 'vue'
+import { Plugins } from '@capacitor/core'
 
-import { createGesture } from '@ionic/vue';
+import { createGesture } from '@ionic/vue'
 import { ref } from 'vue';
 
 

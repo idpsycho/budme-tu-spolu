@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import { IonGrid, IonRow } from '@ionic/vue';
-import { IonCard, IonCardContent, IonCardTitle } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { IonGrid, IonRow } from '@ionic/vue'
+import { IonCard, IonCardContent, IonCardTitle } from '@ionic/vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'Storybehind',
@@ -41,6 +41,6 @@ export default defineComponent({
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap')
 
 </style>

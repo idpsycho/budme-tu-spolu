@@ -30,8 +30,8 @@
     IonGrid,
     IonRow,
     IonButton,
-  } from '@ionic/vue';
-import { Plugins } from '@capacitor/core';
+  } from '@ionic/vue'
+import { Plugins } from '@capacitor/core'
 //Nepouzivat storage v komponentoch, treba spravit ten $store
 // IonGrid a row includnut globalne (v main.js)
 // ; do prdele
@@ -52,8 +52,8 @@ const { Storage } = Plugins;
     },
     async mounted() {
       let doneCategories = [];
-      await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(','); }});
-      doneCategories = doneCategories.map(el=>parseInt(el));
+      await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(','); }})
+      doneCategories = doneCategories.map(el=>parseInt(el))
       
       let x = [];
       await Storage.get({ key: 'campaignData' })
