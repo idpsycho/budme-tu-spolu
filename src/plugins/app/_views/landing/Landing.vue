@@ -1,5 +1,5 @@
 <template>
-<!--     <base-layout screen-title = "Budme-Tu-Spolu">-->
+<base-layout screen-title = "Budme-Tu-Spolu">
   <div class="center">
     <div style="width: 100%;">
       <ion-grid>
@@ -16,7 +16,7 @@
       </ion-grid>
     </div>
   </div>
-<!--     </base-layout> -->
+</base-layout>
 </template>
 
 <script>
