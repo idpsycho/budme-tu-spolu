@@ -19,6 +19,9 @@ export default new Vuex.Store({
         },
         addDoneCategory({ commit }, value) {
             commit('PUSH_DONE_CATEGORY', value)
+        },
+        eraseData({commit}) {
+            commit('ERASE_DATA')
         }
     },
     mutations: {
@@ -26,13 +29,18 @@ export default new Vuex.Store({
             state.campaignData = value
         },
         PUSH_ACCEPTED_CARD(state, value) {
-            state.acceptedCards.push(value)
+            state.acceptedCards.push(value.id)
         },
         PUSH_DECLINED_CARD(state, value) {
-            state.declinedCards.push(value)
+            state.declinedCards.push(value.id)
         },
         PUSH_DONE_CATEGORY(state, value) {
             state.doneCategories.push(value)
+        },
+        ERASE_DATA(state) {
+            state.acceptedCards = []
+            state.declinedCards = []
+            state.doneCategories = []
         }
     },
     getters: {
@@ -49,9 +57,22 @@ export default new Vuex.Store({
                             return x.find(a => a.id === id)
                         });
         },
-        //ToDo: Spravit si cardsByCategory - Done
+        getSwipedCards: state => {
+            let acceptedCards = state.acceptedCards.map(function (x) { return parseInt(x) })
+            let declinedCards = state.declinedCards.map(function (x) { return parseInt(x) })
+            return acceptedCards.concat(declinedCards)
+        },
         getCardsByCategory: state => id => {
             return state.campaignData.data.cards.filter(e => e.category.id == id)
-        }
+        },
+        getDoneCategories: state => {
+            return state.doneCategories.map(function (x) {
+                return parseInt(x);
+            });
+        },
+        getCardsById: state => id => {
+            return state.campaignData.data.cards.filter(e => e == id)
+        },
+
     }
 })
