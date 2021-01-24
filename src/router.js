@@ -1,38 +1,31 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-import Landing from '../views/Landing.vue';
-import Categories from '../views/Categories.vue';
-import Cards from '../views/Cards.vue';
-import Tutorial from '../views/Tutorial.vue';
-import Nextdeck from '../views/Nextdeck.vue'; 
 
-
-//Zmenit zapis na vid. categories, pouzit router layout
 const routes = [
   {
     path: '/',
     name: 'Landing',
-    component: Landing
+    component: () => import ('@/plugins/app/_views/landing/Landing.vue')
   },
   {
     path: '/categories',
     name: 'Categories',
-    component: () => import ('../views/Categories.vue'),
+    component: () => import ('@/plugins/app/_views/categories/Categories.vue')
   },
   {
     path: '/categories/:categoryId/cards',
     name: 'Cards',
-    component: Cards
+    component: () => import ('@/plugins/app/_views/cards/Cards.vue')
   },
-  {
-    path: '/categories/tutorial',
-    name: 'Tutorial',
-    component: Tutorial
-  },
-  {
-    path: '/nextdeck', //neviem aky nazov dat tomuto screenu (Je to screen 5. Deck moznost)
-    name: 'Nextdeck',
-    component: Nextdeck
-  },
+  // {
+  //   path: '/categories/tutorial',
+  //   name: 'Tutorial',
+  //   component: () => import ('./plugins/app/_views/tutorial/Tutorial.vue')
+  // },
+  // {
+  //   path: '/nextdeck',
+  //   name: 'Nextdeck',
+  //   component: () => import ('./plugins/app/_views/nextdeck/Nextdeck.vue')
+  // },
 ]
 
 const router = createRouter({
