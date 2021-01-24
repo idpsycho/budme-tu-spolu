@@ -21,11 +21,11 @@ const routes = [
   //   name: 'Tutorial',
   //   component: () => import ('./plugins/app/_views/tutorial/Tutorial.vue')
   // },
-  // {
-  //   path: '/nextdeck',
-  //   name: 'Nextdeck',
-  //   component: () => import ('./plugins/app/_views/nextdeck/Nextdeck.vue')
-  // },
+  {
+    path: '/nextdeck',
+    name: 'Nextdeck',
+    component: () => import ('@/plugins/app/_views/nextdeck/Nextdeck.vue')
+  },
 ]
 
 const router = createRouter({
