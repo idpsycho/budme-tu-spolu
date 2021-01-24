@@ -40,9 +40,9 @@
       }
     },
     async mounted() {
-      // let doneCategories = [];
-      // await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(','); }});
-      // doneCategories = doneCategories.map(el=>parseInt(el));
+      let doneCategories = [];
+      await Storage.get({ key: 'isCategoryDone' }).then(resp => { if (resp.value != null) { doneCategories = resp.value.split(','); }});
+      doneCategories = doneCategories.map(el=>parseInt(el));
 
       if (this.categories[0] == null) {
         this.$router.push({name: 'Nextdeck'})
