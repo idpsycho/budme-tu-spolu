@@ -1,13 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import baselayout from '@/plugins/app/_layout/baselayout.vue'
 import router from './router'
-import { Plugins } from '@capacitor/core'
-import { IonGrid, IonRow } from '@ionic/vue'
+import store from './store'
+import baselayout from "@/plugins/app/_layout/baselayout"
 
-const { Storage } = Plugins
 
-import { IonicVue } from '@ionic/vue'
+import { IonicVue, IonGrid, IonRow } from '@ionic/vue'
 
 //base-layout tu nebude, pouzit vue-layout
 
@@ -30,22 +28,21 @@ import '@ionic/vue/css/display.css'
 
 /* Theme variables */
 import './plugins/app/theme/variables.css'
+import './plugins/app/theme/style.css'
 import axios from 'axios'
-import { from } from 'core-js/fn/array'
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
+  .use(store)
+
 
 app.component('base-layout', baselayout)
-app.component('ion-grid', IonGrid)
-app.component('ion-row', IonRow)
-// Url tahat z .env (bez url)
-// Storage je na to aby mi nieco zostalo po refreshy
-// Treba spravit na to $store 
-// Pozriet si Open-Academy kurz na Vue $store (Vue 2)
+app.component('IonGrid', IonGrid)
+app.component('IonRow', IonRow)
+
 router.isReady().then(() => {
-  axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER').then(response => { Storage.set({ key: 'campaignData', value: JSON.stringify(response.data) }) })
+  axios.get(process.env.VUE_APP_API_URL).then(response => { store.dispatch('setCampaignData', response.data) })
   app.mount('#app')
-});
+})
 
