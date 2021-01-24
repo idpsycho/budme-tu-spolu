@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import baselayout from "@/plugins/app/_layout/baselayout"
-
+import axios from 'axios'
 
 import { IonicVue, IonGrid, IonRow } from '@ionic/vue'
 
@@ -29,7 +29,6 @@ import '@ionic/vue/css/display.css'
 /* Theme variables */
 import './plugins/app/theme/variables.css'
 import './plugins/app/theme/style.css'
-import axios from 'axios'
 
 const app = createApp(App)
   .use(IonicVue)

@@ -1,20 +1,13 @@
 <template>
-  
   <ion-item v-for="category in categories" :key="category.id">
-      <ion-progress-bar :value="category.value" :style="{ '--progress-background': category.color, '--background': 'lightgray' }"></ion-progress-bar>
+      <ion-progress-bar :value="RenderProgressBarValue(category)" :style="{ '--progress-background': category.color, '--background': 'lightgray' }"></ion-progress-bar>
   </ion-item>
-
 </template>
 
 <script>
-import axios from 'axios'
 import { IonItem, IonProgressBar } from '@ionic/vue';
-import { Plugins } from '@capacitor/core';
-
-const { Storage } = Plugins;
 
 export default {
-  name: 'progress-bar',
   components: {
     IonItem,
     IonProgressBar
@@ -22,50 +15,21 @@ export default {
   data() {
     return {
       categories: [],
-      allCardsIds: [],
     }
   },
-  async mounted() {
-      let x = [];
+  mounted() {
+    this.categories = this.$store.getters.getCategories
+  },
+  methods: {
+    RenderProgressBarValue(category) {
+      let allCardsInCategory = this.$store.getters.getCardsByCategory(category.id)
+      let allSwipedCardsIds = null
+      allSwipedCardsIds = this.$store.getters.getSwipedCards
 
-      //This get all data about campaign and filter categories
-      let response = await Storage.get({ key: 'campaignData' })
-      response = JSON.parse(response.value).data;
-      response.cards.forEach(element => {
-          if (!x.includes(element.category.id)) {
-              x.push(element.category)
-          }
-      });
-      this.categories =
-        Array.from(new Set(x.map(a => a.id)))
-        .map(id => {
-        return x.find(a => a.id === id);
-      });
-      
-      //This set progress bar value
-      for(let i = 0; i <= this.categories.length - 1; i++) {
-        let z = null;
-        this.categories[i].allCardsValue = response.cards.filter(element => element.category.id == this.categories[i].id).length;
-        
+      let count = allCardsInCategory.map(function (x) { if (allSwipedCardsIds.includes(x.id)) { return true } }).filter(x => x == true)
 
-        let acceptedCards = await Storage.get({ key: 'isCardAccepted' });
-        let declinedCards = await Storage.get({ key: 'isCardDeclined' });
-
-        this.allCardsIds = acceptedCards.value + ',' + declinedCards.value;
-        this.allCardsIds = this.allCardsIds.split(',');
-        this.allCardsIds = this.allCardsIds.map(el=>parseInt(el));
-        this.allCardsIds = this.allCardsIds.sort();
-
-        let y = [];
-        for (let j = 0; j <= this.allCardsIds.length - 1; j++) {        
-          response.cards.forEach(el => 
-          { if (el.id == this.allCardsIds[j] && el.category.id == this.categories[i].id) {
-            y.push([]);
-          }})
-            
-        }
-        this.categories[i].value = ((100 / this.categories[i].allCardsValue)  * y.length) / 100;
-      }
+      return ((100 / allCardsInCategory.length)  * count.length) / 100
+    }
   }
 }
 </script>
