@@ -28,15 +28,15 @@
 </template>
 
 <script>
+import { watch } from 'vue';
 // ToDo: ; do prdele
 // ToDo: ODPORUCANIE: w@tip/no-semis
   export default {
-    data() {
-      return {
-        categories: this.$store.getters.getCategories
-      }
-    },
+    
     computed: {
+      categories(){
+        return this.$store.getters.getCategories
+      },
       notDoneCategories() {
         let categories = [];
         let doneCategories = this.$store.getters.getDoneCategories
@@ -45,15 +45,20 @@
             categories.push(this.categories[i])
           }
         }
-        if (categories[0] == null) {
-          this.nextDeck()
-        }
+        
         return categories
       }
     },
     methods: {
       nextDeck() {
         this.$router.push({name: 'Nextdeck'})
+      }
+    },
+    watch: {
+      notDoneCategories(categories) {
+        if (!categories.length) {
+          this.nextDeck()
+        }
       }
     }
   };

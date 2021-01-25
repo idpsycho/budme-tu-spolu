@@ -31,15 +31,14 @@ export default {
   },
   data() {
     return {
-      cards: this.$store.getters.getCardsByCategory(this.categoryId),
       categoryId: this.$route.params.categoryId,
       currentCard: 0,
     }
   },
-  mounted() {
-    this.cards = this.$store.getters.getCardsByCategory(this.categoryId)
-  },
   computed: {
+    cards(){
+      return this.$store.getters.getCardsByCategory(this.categoryId)
+    },
     renderedCard() {
       return [this.cards[this.currentCard]]
     }

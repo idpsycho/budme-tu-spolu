@@ -46,6 +46,9 @@ export default new Vuex.Store({
     getters: {
         getCategories: state => {
             let x = []
+            if ( !state.campaignData?.data?.cards) {
+                return x
+            }
             for (let i = 0; i <= state.campaignData.data.cards.length - 1; i++) {
                 if (!x.includes(state.campaignData.data.cards[i].category.id)) {
                     x.push(state.campaignData.data.cards[i].category)
@@ -63,6 +66,9 @@ export default new Vuex.Store({
             return acceptedCards.concat(declinedCards)
         },
         getCardsByCategory: state => id => {
+            if(!state.campaignData?.data?.cards){
+                return {}
+            }
             return state.campaignData.data.cards.filter(e => e.category.id == id)
         },
         getDoneCategories: state => {
@@ -71,6 +77,9 @@ export default new Vuex.Store({
             });
         },
         getCardsById: state => id => {
+            if ( !state.campaignData?.data?.cards) {
+                return [] 
+            }
             return state.campaignData.data.cards.filter(e => e == id)
         },
 

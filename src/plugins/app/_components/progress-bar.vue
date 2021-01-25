@@ -12,14 +12,13 @@ export default {
     IonItem,
     IonProgressBar
   },
-  data() {
-    return {
-      categories: [],
+  
+  computed: { //computed - funkcia categories taha na novo data zo store potom ako sa refreshne jeho content
+    categories(){
+      return this.$store.getters.getCategories
     }
   },
-  mounted() {
-    this.categories = this.$store.getters.getCategories
-  },
+
   methods: {
     RenderProgressBarValue(category) {
       let allCardsInCategory = this.$store.getters.getCardsByCategory(category.id)
