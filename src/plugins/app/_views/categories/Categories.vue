@@ -2,7 +2,7 @@
 <!-- ToDo: Pozriet vue-layout package -->
 
   <base-layout screen-title = "Kategórie" go-back-link="/">
-
+    
     <ion-grid style="height: 100%">
       <div style="height: 60%;" v-if="categories != null">
         <router-link v-for="category in notDoneCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
@@ -28,10 +28,8 @@
 </template>
 
 <script>
-
 // ToDo: ; do prdele
 // ToDo: ODPORUCANIE: w@tip/no-semis
-
   export default {
     data() {
       return {
@@ -42,17 +40,14 @@
       notDoneCategories() {
         let categories = [];
         let doneCategories = this.$store.getters.getDoneCategories
-
         for (let i = 0; i <= this.categories.length - 1; i++) {
           if (!doneCategories.includes(this.categories[i].id)) {
             categories.push(this.categories[i])
           }
         }
-
         if (categories[0] == null) {
           this.nextDeck()
         }
-
         return categories
       }
     },

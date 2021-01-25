@@ -2,10 +2,10 @@ import Vuex from 'vuex'
 
 export default new Vuex.Store({
     state: {
-        'campaignData': [],
-        'acceptedCards': [],
-        'declinedCards': [],
-        'doneCategories': []
+        campaignData: [],
+        acceptedCards: [],
+        declinedCards: [],
+        doneCategories: []
     },
     actions: {
         setCampaignData({ commit }, value) {
