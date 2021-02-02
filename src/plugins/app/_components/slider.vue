@@ -1,6 +1,6 @@
 <template>
-  <div v-if="this.cards[0] != null">
-    <div v-for="card of renderedCard" :key="card" :style="{'background-color':  card.category.color }">
+  <div v-if="this.cards[0] != null" style="height: 70%">
+    <div v-for="card of renderedCard" :key="card" :style="{'background-color':  card.category.color }" style="height: 50vh; font-size: 4vh; margin-top: 5vh;">
       {{card.id}}<br/>
       {{ card.activity }}<br/>
       {{card.description}}<br/>
