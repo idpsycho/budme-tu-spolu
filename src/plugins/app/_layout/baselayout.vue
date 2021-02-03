@@ -1,15 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-back-button :default-href="goBackLink"></ion-back-button>
-        </ion-buttons>
-        <ion-title>{{ screenTitle }}</ion-title>
-        <ion-buttons slot="end">
-          <slot name="actions-end"></slot>
-        </ion-buttons>
-      </ion-toolbar>   
+
     </ion-header>
     <ion-content>
       <slot />
@@ -21,11 +13,11 @@
 import {
   IonPage,
   IonHeader,
-  IonToolbar,
-  IonTitle,
+  //IonToolbar,
+  //IonTitle,
   IonContent,
-  IonBackButton,
-  IonButtons,
+  //IonBackButton,
+  //IonButtons,
 } from "@ionic/vue";
 
 export default {
@@ -33,11 +25,11 @@ export default {
   components: {
     IonPage,
     IonHeader,
-    IonToolbar,
-    IonTitle,
+    //IonToolbar,
+    //IonTitle,
     IonContent,
-    IonBackButton,
-    IonButtons,
+    //IonBackButton,
+    //IonButtons,
   },
 };
 </script>
