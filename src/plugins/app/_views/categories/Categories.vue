@@ -20,6 +20,7 @@
     </ion-grid>
     <ion-grid style="height: 80%">
       <div style="height: 65%;" v-if="categories != null">
+        <h1 class="select-category">Select category</h1>
         <router-link v-for="category in notDoneCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
             <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
               {{ category.name }}
@@ -28,8 +29,8 @@
       </div>
       <div style="height: 35%; padding-top: 25%;">
         <router-link :to="{name: 'Categories'}" class="a-category">
-            <ion-row fake :style="{'background-color':  `#19EE88` }" class="ion-justify-content-center ion-align-items-center how-to-play">
-                HOW TO PLAY
+            <ion-row class="ion-justify-content-center ion-align-items-center how-to-play">
+                How to play
             </ion-row>
         </router-link>
       </div>
@@ -92,13 +93,15 @@ import { watch } from 'vue';
     font-size: 5vw;
   }
   .row-category {
-    height: 25%;
+    height: 20%;
     margin: 3vw;
   }
 
   .how-to-play {
     height: 12vh;
     margin: 3vw;
+    background-color: darkgray;
+    color: white;
   }
 
 .back-to-feed {
@@ -108,5 +111,13 @@ import { watch } from 'vue';
   font-size: 5vw;
   line-height: 3.3vh;
   margin-left: 3vw;
+}
+
+.select-category {
+  font-size: 5vw;
+  color: black;
+  margin: auto;
+  line-height: 3.3vh;
+  padding: 3vw;
 }
 </style>
