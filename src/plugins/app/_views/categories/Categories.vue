@@ -6,7 +6,7 @@
           <table style="width: 100%;">
               <tr>
                 <td style="width: 75vw;">
-                  <a class="back-to-feed">&lt; Back to feed</a>
+                  <router-link :to="{ name: 'Landing'}" class="back-to-feed">&lt; Back to feed</router-link>
                 </td> 
                 <td style="width: 25vw">
                   <div class="landing-block">
@@ -28,7 +28,7 @@
         </router-link>
       </div>
       <div>
-        <router-link :to="{name: 'Categories'}" class="a-category">
+        <router-link :to="{name: 'How-to-play'}" class="a-category">
             <ion-row class="ion-justify-content-center ion-align-items-center how-to-play">
                 How to play
             </ion-row>
@@ -100,7 +100,7 @@ import { watch } from 'vue';
     height: 11vh;
     margin: 3vw;
     margin-top: 7vh;
-    background-color: darkgray;
+    background: #4D4D4D;
     color: white;
   }
 
@@ -109,8 +109,8 @@ import { watch } from 'vue';
   text-decoration: none;
   color: black; 
   margin:auto;
-  font-weight: bold; 
-  font-size: 5vw;
+  font-size: 4.5vw;
+  font-weight: bold;
   margin-left: 3vw;
 }
 
