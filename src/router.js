@@ -16,11 +16,11 @@ const routes = [
     name: 'Cards',
     component: () => import ('@/plugins/app/_views/cards/Cards.vue')
   },
-  // {
-  //   path: '/categories/tutorial',
-  //   name: 'Tutorial',
-  //   component: () => import ('./plugins/app/_views/tutorial/Tutorial.vue')
-  // },
+  {
+    path: '/categories/how-to-play',
+    name: 'Tutorial',
+    component: () => import ('./plugins/app/_views/tutorial/How-to-play.vue')
+  },
   {
     path: '/nextdeck',
     name: 'Nextdeck',
