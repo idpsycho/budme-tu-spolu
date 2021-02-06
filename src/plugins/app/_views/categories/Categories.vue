@@ -3,7 +3,7 @@
     <ion-grid style="max-width: 100vw;">
       <ion-row>
         <ion-col>
-          <table style="width: 100%; margin: auto;">
+          <table style="width: 100%;">
               <tr>
                 <td style="width: 75vw;">
                   <a class="back-to-feed">&lt; Back to feed</a>
@@ -18,16 +18,16 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid style="height: 80%">
-      <div style="height: 65%;" v-if="categories != null">
-        <h1 class="select-category">Select category</h1>
+    <ion-grid>
+      <div v-if="categories != null">
+         <h2 class="select-category">Select category</h2>
         <router-link v-for="category in notDoneCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
             <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
               {{ category.name }}
             </ion-row>
         </router-link>
       </div>
-      <div style="height: 35%; padding-top: 25%;">
+      <div>
         <router-link :to="{name: 'Categories'}" class="a-category">
             <ion-row class="ion-justify-content-center ion-align-items-center how-to-play">
                 How to play
@@ -84,7 +84,6 @@ import { watch } from 'vue';
   font-size: 5vw;
   color: black;
   margin: auto;
-  line-height: 3.3vh;
 }
 
 .a-category {
@@ -93,23 +92,25 @@ import { watch } from 'vue';
     font-size: 5vw;
   }
   .row-category {
-    height: 20%;
+    height: 11vh;
     margin: 3vw;
   }
 
   .how-to-play {
-    height: 12vh;
+    height: 11vh;
     margin: 3vw;
+    margin-top: 7vh;
     background-color: darkgray;
     color: white;
   }
 
 .back-to-feed {
+  height: 10vh;
   text-decoration: none;
   color: black; 
+  margin:auto;
   font-weight: bold; 
   font-size: 5vw;
-  line-height: 3.3vh;
   margin-left: 3vw;
 }
 
@@ -118,6 +119,6 @@ import { watch } from 'vue';
   color: black;
   margin: auto;
   line-height: 3.3vh;
-  padding: 3vw;
+  padding: 3vh 3vw 3vh 3vw;
 }
 </style>
