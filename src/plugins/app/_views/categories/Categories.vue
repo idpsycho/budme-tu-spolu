@@ -22,7 +22,7 @@
       <div v-if="categories != null">
          <h2 class="select-category">Select category</h2>
         <router-link v-for="category in notDoneCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
-            <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center  ion-align-items-center row-category">
+            <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center ion-align-items-center row-category">
               {{ category.name }}
             </ion-row>
         </router-link>
