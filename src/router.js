@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: '/categories/how-to-play',
-    name: 'Tutorial',
+    name: 'How-to-play',
     component: () => import ('./plugins/app/_views/tutorial/How-to-play.vue')
   },
   {
