@@ -1,6 +1,6 @@
 <template>
     <base-layout screen-title = "Deck možnosť"> 
-        <ion-grid>
+        <ion-grid class="grid1">
             <table style="width: 100%; text-align: right; font-size: 5vw;">
                 <tr>
                     <td style="padding: 3vw;">
@@ -9,7 +9,7 @@
                 </tr>
             </table>
         </ion-grid>
-        <ion-grid>
+        <ion-grid class="grid2">
             <div class="a-category">
                 <ion-row class="ion-justify-content-center ion-align-items-center end-of-deck-text">
                     End of deck
@@ -81,4 +81,15 @@ ion-button {
   }
 
 
+.grid1 {
+max-width: 100vw; 
+height: 10%;
+background: lightyellow;
+}
+
+.grid2 {
+max-width: 100vw; 
+height: 90%;
+background: lightyellow;
+}
 </style>

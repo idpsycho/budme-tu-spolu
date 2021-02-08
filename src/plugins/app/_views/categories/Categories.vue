@@ -1,6 +1,6 @@
 <template>
   <base-layout>
-    <ion-grid style="max-width: 100vw;">
+    <ion-grid class="grid1">
       <ion-row>
         <ion-col>
           <table style="width: 100%;">
@@ -18,7 +18,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid>
+    <ion-grid class="grid2">
       <div v-if="categories != null">
          <h2 class="select-category">Select category</h2>
         <router-link v-for="category in notDoneCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
@@ -120,5 +120,17 @@ import { watch } from 'vue';
   margin: auto;
   line-height: 3.3vh;
   padding: 3vh 3vw 3vh 3vw;
+}
+
+.grid1 {
+max-width: 100vw; 
+height: 10%;
+background: lightyellow;
+}
+
+.grid2 {
+max-width: 100vw; 
+height: 90%;
+background: lightyellow;
 }
 </style>

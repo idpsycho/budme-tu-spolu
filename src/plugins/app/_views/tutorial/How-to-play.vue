@@ -1,9 +1,9 @@
 <template>
   <base-layout>
-    <ion-grid style="max-width: 100vw;">
+    <ion-grid class="grid1">
       <ion-row>
         <ion-col>
-          <table style="width: 100%;">
+          <table style="width: 100%">
               <tr>
                 <td style="width: 75vw;">
                   <router-link :to="{ name: 'Landing'}" class="back-to-feed">&lt; Back to feed</router-link>
@@ -18,7 +18,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid>
+    <ion-grid class="grid2">
             <h2 class="select-category">Select category</h2>
             <ion-slides pager="false" :options="slideOpts">
             <ion-slide>
@@ -97,7 +97,7 @@ export default defineComponent({
 }
 
 .landing-block {
-  height: 10vh;
+
   width: 20vw;
   font-size: 5vw;
   color: black;
@@ -134,4 +134,17 @@ export default defineComponent({
     color: black;
     display: flex; 
 }
+
+.grid1 {
+max-width: 100vw; 
+height: 10%;
+background: lightyellow;
+}
+
+.grid2 {
+max-width: 100vw; 
+height: 90%;
+background: lightyellow;
+}
+
 </style>

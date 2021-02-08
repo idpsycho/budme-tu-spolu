@@ -18,7 +18,7 @@
 <ion-grid>
   <ion-col style="text-align:center">
     <ion-list lines="none">
-      <ion-item v-for="item in items" :key="item.src" >             <!-- riadok 21 az 30 treba upravit tie {{ item. }} je to tam len pre to aby sa mi to lahsie stylovalo (Mario) -->
+      <ion-item v-for="item in items" :key="item.src">             <!-- riadok 21 az 30 treba upravit tie {{ item. }} je to tam len pre to aby sa mi to lahsie stylovalo (Mario) -->
         <ion-card style="width: 100vw; border-radius: 0px;">
           <ion-img :src="item.src"></ion-img>
             <table style="width: 100%">
@@ -107,4 +107,7 @@ export default ({
   padding: 0px 20px 0px 20px; 
  }
 
+ion-button {
+  text-transform: none;
+}
  </style>
