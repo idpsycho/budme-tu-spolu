@@ -17,6 +17,11 @@ const routes = [
     component: () => import ('@/plugins/app/_views/cards/Cards.vue')
   },
   {
+    path: '/categories/:categoryId/cards-ui',
+    name: 'Cards-ui',
+    component: () => import ('@/plugins/app/_views/cards/Cards-ui.vue')
+  },
+  {
     path: '/categories/how-to-play',
     name: 'How-to-play',
     component: () => import ('./plugins/app/_views/tutorial/How-to-play.vue')
