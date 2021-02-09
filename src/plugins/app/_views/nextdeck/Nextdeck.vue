@@ -1,7 +1,7 @@
 <template>
     <base-layout screen-title = "Deck možnosť"> 
         <ion-grid class="grid1">
-            <table style="width: 100%; text-align: right; font-size: 5vw;">
+            <table style="width: 100%; text-align: right; font-size: 7vw;">
                 <tr>
                     <td style="padding: 3vw;">
                         &#10005;
@@ -16,9 +16,6 @@
                 </ion-row>
                 <ion-row class="ion-justify-content-center ion-align-items-center end-of-deck">
                     Play skipped cards
-                </ion-row>
-                <ion-row class="ion-justify-content-center ion-align-items-center end-of-deck">
-                    New deck from this category
                 </ion-row>
                 <ion-row class="ion-justify-content-center ion-align-items-center end-of-deck">
                     Switch category
