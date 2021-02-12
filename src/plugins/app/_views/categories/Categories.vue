@@ -1,77 +1,96 @@
 <template>
-  <base-layout>
-    <ion-grid class="grid1">
-      <ion-row>
-        <ion-col>
-          <table style="width: 100%;">
-              <tr>
-                <td style="width: 75vw;">
-                  <router-link :to="{ name: 'Landing'}" class="back-to-feed">&lt; Back to feed</router-link>
-                </td> 
-                <td style="width: 25vw">
-                  <div class="landing-block">
-                  Been<br>There<br>Together
-                  </div>
-                </td>
-              </tr>   
-          </table>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-grid class="grid2">
-      <div v-if="categories != null">
-         <h2 class="select-category">Select category</h2>
-        <router-link v-for="category in notDoneCategories" :key="category.id" :to="{ path: '/categories/' + category.id + '/cards' }" class="a-category">
-            <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center ion-align-items-center row-category">
-              {{ category.name }}
+  <ion-page>
+    <ion-content>
+      <ion-grid class="grid1">
+            <ion-row>
+              <ion-col>
+                <table style="width: 100%;">
+                    <tr>
+                      <td style="width: 75vw;">
+                        <router-link :to="{ name: 'Landing'}" class="back-to-feed">&lt; Back to feed</router-link>
+                      </td> 
+                      <td style="width: 25vw">
+                        <div class="landing-block">
+                        Been<br>There<br>Together
+                        </div>
+                      </td>
+                    </tr>   
+                </table>
+              </ion-col>
             </ion-row>
-        </router-link>
-      </div>
-      <div>
-        <router-link :to="{name: 'How-to-play'}" class="a-category">
-            <ion-row class="ion-justify-content-center ion-align-items-center how-to-play">
-                How to play
-            </ion-row>
-        </router-link>
-      </div>
-    </ion-grid>
-  </base-layout>
+          </ion-grid>
+          <ion-grid class="grid2">
+            <div v-if="!loading && categories.length">
+              <h2 class="select-category">Select category</h2>
+                <div v-for="category in categories" :key="category.id" @click="navToCategory(category.id)" class="a-category">
+                    <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center ion-align-items-center row-category">
+                      {{ category.name }}
+                    </ion-row>
+                </div>
+            </div>
+            <div v-else-if="loading" class="ion-text-center ion-margin ion-padding">
+              <ion-spinner></ion-spinner>
+            </div>
+            <div v-else  class="ion-text-center ion-margin ion-padding">
+              <h2 class="select-category">No categories found</h2>
+            </div>
+            <div>
+              <div :to="{name: 'How-to-play'}" class="a-category">
+                  <ion-row class="ion-justify-content-center ion-align-items-center how-to-play">
+                      How to play
+                  </ion-row>
+              </div>
+            </div>
+          </ion-grid>
+      </ion-content>
+  </ion-page>
 </template>
 
 <script>
-import { IonRow,} from '@ionic/vue';
-import { watch } from 'vue';
-// ToDo: ; do prdele
-// ToDo: ODPORUCANIE: w@tip/no-semis
+import axios from 'axios'
+import {mapState} from 'vuex'
+
   export default {
-    components: { IonRow },
-    computed: {
-      categories(){
-        return this.$store.getters.getCategories
-      },
-      notDoneCategories() {
-        let categories = [];
-        let doneCategories = this.$store.getters.getDoneCategories
-        for (let i = 0; i <= this.categories.length - 1; i++) {
-          if (!doneCategories.includes(this.categories[i].id)) {
-            categories.push(this.categories[i])
-          }
-        }
-        
-        return categories
+    data(){
+      return{
+        loading: true
       }
+    },
+    async mounted(){
+      await this.$store.dispatch('loadCategories')
+      this.loading = false
     },
     methods: {
       nextDeck() {
         this.$router.push({name: 'Nextdeck'})
+      },
+      navToCategory(categoryId){
+        this.$router.push({name: 'Cards', params:{categoryId: categoryId}})
       }
     },
+    computed: {
+      ...mapState(['categories']),
+      // categories(){
+      //   return this.$store.getters.getCategories
+      // },
+      // notDoneCategories() {
+      //   let categories = [];
+      //   let doneCategories = this.$store.getters.getDoneCategories
+      //   for (let i = 0; i <= this.categories.length - 1; i++) {
+      //     if (!doneCategories.includes(this.categories[i].id)) {
+      //       categories.push(this.categories[i])
+      //     }
+      //   }
+        
+      //   return categories
+      // }
+    },
     watch: {
-      notDoneCategories(categories) {
-        if (!categories.length) {
-          this.nextDeck()
-        }
-      }
+      // notDoneCategories(categories) {
+      //   if (!categories.length) {
+      //     this.nextDeck()
+      //   }
+      // }
     }
   };
 </script>

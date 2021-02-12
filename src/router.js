@@ -12,7 +12,7 @@ const routes = [
     component: () => import ('@/plugins/app/_views/categories/Categories.vue')
   },
   {
-    path: '/categories/:categoryId/cards',
+    path: '/categories/cards',
     name: 'Cards',
     component: () => import ('@/plugins/app/_views/cards/Cards.vue')
   },

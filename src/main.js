@@ -27,7 +27,7 @@ import '@ionic/vue/css/flex-utils.css'
 import '@ionic/vue/css/display.css'
 
 /* Theme variables */
-import './plugins/app/theme/variables.css'
+// import './plugins/app/theme/variables.css'
 import './plugins/app/theme/style.css'
 
 const app = createApp(App)
@@ -35,6 +35,9 @@ const app = createApp(App)
   .use(router)
   .use(store)
 
+import { registerIonicComponents } from '@/plugins/w/ionic/'
+
+registerIonicComponents(app)
 
 app.component('base-layout', baselayout)
 app.component('IonGrid', IonGrid)

@@ -1,46 +1,46 @@
 <template>
-<base-layout>
-<ion-grid style="max-width: 100vw;">
-  <ion-row>
-    <ion-col>
-      <div class="landing-block">
-        Been<br>There<br>Together
-      </div>
-    </ion-col>
-    <ion-col style="text-align:center">
-        <ion-button href="http://www.beentheretogether.cards/" color="lightgray" class="landing-button1">Info</ion-button>
-    </ion-col>
-    <ion-col style="text-align:center">
-        <ion-button color="black" class="landing-button2" >Play</ion-button>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-<ion-grid>
-  <ion-col style="text-align:center">
-    <ion-list lines="none">
-      <ion-item v-for="item in items" :key="item.src">             <!-- riadok 21 az 30 treba upravit tie {{ item. }} je to tam len pre to aby sa mi to lahsie stylovalo (Mario) -->
-        <ion-card style="width: 100vw; border-radius: 0px;">
-          <ion-img :src="item.src"></ion-img>
-            <table style="width: 100%">
-              <tr>
-                <td><h2 class="card-text1">{{item.username}}</h2></td> 
-                <td><h2 class="card-text2">{{item.date}}</h2></td>
-              </tr>   
-            </table>
-              <ion-card-content style="padding-top: 0px; font-size: 4vw;">{{item.text}}</ion-card-content>
-        </ion-card>
-      </ion-item>
-    </ion-list>
-  </ion-col>
-</ion-grid>
-</base-layout>
+  <ion-page>
+    <ion-content>
+      <ion-grid style="max-width: 100vw;">
+        <ion-row>
+          <ion-col>
+            <div class="landing-block">
+              Been<br>There<br>Together
+            </div>
+          </ion-col>
+          <ion-col style="text-align:center">
+              <ion-button href="http://www.beentheretogether.cards/" target="_blank" color="lightgray" class="landing-button1">Info</ion-button>
+          </ion-col>
+          <ion-col style="text-align:center">
+              <ion-button color="black" class="landing-button2" @click="$router.push({name: 'Categories'})">Play</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-col style="text-align:center">
+          <ion-list lines="none">
+            <ion-item v-for="item in items" :key="item.src">             <!-- riadok 21 az 30 treba upravit tie {{ item. }} je to tam len pre to aby sa mi to lahsie stylovalo (Mario) -->
+              <ion-card style="width: 100vw; border-radius: 0px;">
+                <ion-img :src="item.src"></ion-img>
+                  <table style="width: 100%">
+                    <tr>
+                      <td><h2 class="card-text1">{{item.username}}</h2></td> 
+                      <td><h2 class="card-text2">{{item.date}}</h2></td>
+                    </tr>   
+                  </table>
+                    <ion-card-content style="padding-top: 0px; font-size: 4vw;">{{item.text}}</ion-card-content>
+              </ion-card>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-grid>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script>
-import { IonImg, IonItem, IonButton, IonCard, IonCardContent, IonRow, IonList } from '@ionic/vue';
 
 export default ({
-  components: { IonImg, IonItem, IonButton, IonCard, IonCardContent, IonRow, IonList },
   setup() {
     const items = [{           // Toto je len na to aby som pri stylovani si vedel predstavit ako to bude vyzerat. Mozete v pohode vymazat od riadku 44 po 62 (Mario)
       'text': 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Pelle ntesque id odio turpis.',
