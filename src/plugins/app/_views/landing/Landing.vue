@@ -1,38 +1,38 @@
 <template>
   <ion-page>
     <ion-content>
-      <ion-grid style="max-width: 100vw;">
+      <ion-grid class="bg-image">
+        <ion-toolbar>
         <ion-row>
-          <ion-col>
-            <div class="landing-block">
-              Been<br>There<br>Together
+          <ion-col size="5">
+            <div class="logo">
+              BEEN<br>THERE<br>TOGETHER
             </div>
           </ion-col>
-          <ion-col style="text-align:center">
-              <ion-button href="http://www.beentheretogether.cards/" target="_blank" color="lightgray" class="landing-button1">Info</ion-button>
+          <ion-col style="5">
+            <div class="language">
+              EN/SK
+            </div>
           </ion-col>
-          <ion-col style="text-align:center">
-              <ion-button color="black" class="landing-button2" @click="$router.push({name: 'Categories'})">Play</ion-button>
+          <ion-col size="2" style="text-align: right;">
+            <div>
+              <img class="icon1" src="/assets/icon/question.png">
+            </div>
           </ion-col>
         </ion-row>
-      </ion-grid>
-      <ion-grid>
-        <ion-col style="text-align:center">
-          <ion-list lines="none">
-            <ion-item v-for="item in items" :key="item.src">             <!-- riadok 21 az 30 treba upravit tie {{ item. }} je to tam len pre to aby sa mi to lahsie stylovalo (Mario) -->
-              <ion-card style="width: 100vw; border-radius: 0px;">
-                <ion-img :src="item.src"></ion-img>
-                  <table style="width: 100%">
-                    <tr>
-                      <td><h2 class="card-text1">{{item.username}}</h2></td> 
-                      <td><h2 class="card-text2">{{item.date}}</h2></td>
-                    </tr>   
-                  </table>
-                    <ion-card-content style="padding-top: 0px; font-size: 4vw;">{{item.text}}</ion-card-content>
-              </ion-card>
-            </ion-item>
-          </ion-list>
-        </ion-col>
+        </ion-toolbar>
+        <ion-row>
+          <ion-col size="12">
+            <div class="text1">
+              Explore your environment through play
+            </div>
+            <div class="text2">
+              BTT will get you out of your comfort zone. Play on your own, engage with your surroundings, learn something and meet new people
+            </div>
+            <ion-button class="btn-try-it-out" color="dark" expand="block">Try it out!</ion-button>
+            <img class="icon2" src="/assets/icon/caret-down.png">
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-content>
   </ion-page>
@@ -40,73 +40,71 @@
 
 <script>
 
-export default ({
-  setup() {
-    const items = [{           // Toto je len na to aby som pri stylovani si vedel predstavit ako to bude vyzerat. Mozete v pohode vymazat od riadku 44 po 62 (Mario)
-      'text': 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Pelle ntesque id odio turpis.',
-      'src': '../assets/Test.jpg',
-      'username': 'John Stone',
-      'date': 'Today, 15:33'
-    }, {
-      'text': 'Curabitur pellentesque suscipit arcu vitae varius. Duis finibus sit amet sapien sit amet tempus. Sed pharetra arcu vitae velit varius placerat. Aenean nisi quam, feugiat non tristique vel, facilisis at metus.',
-      'src': '../assets/Test.jpg',
-      'username': 'Ponnappa Priya',
-      'date': 'Yesterday, 15:33'
-    }, {
-      'text': 'Integer tempor lorem dapibus erat ornare, quis condimentum nunc tincidunt. Nulla vel faucibus ex, at vestibulum mauris. Phasellus dignissim diam et justo elementum, sed condimentum libero placerat.',
-      'src': '../assets/Test.jpg',
-      'username': 'Tarryn Campbell-Gillies',
-      'date': '19/01/21'
-    }];
-    return { items }
-  }
-});
 </script>
 
 <style scoped>
 
-.landing-block {
-  height: 10vh;
-  width: 20vw;
-  font-size: 5vw;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+.logo {
+  font-size: 4vw;
   color: black;
-  margin: auto;
-  line-height: 3.3vh;
+  margin: 2vh 3vw 0vh 3vw;
+ font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bolder;
 }
 
-.landing-button1 {
-  height: 10vh;
-  width: 25vw;
-  font-size: 5vw;
-  background-color: lightgray;
+.icon1 {
+  width: 10vw;
   color: black;
-  margin: auto;
-  border-radius: 0;
+  margin: 3vh 3vw 0vh 3vw;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bolder;
+  float: right;
 }
 
-.landing-button2 {
-  height: 10vh;
-  width: 25vw;
+.language {
+  font-size: 6vw;
+  color: black;
+  margin: 4vh 3vw 0vh 3vw;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700;
+  float: right;
+}
+
+.text1 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12vw;
+  padding: 5vh 3vw 5vh 3vw;
+}
+
+.text2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 700;
   font-size: 5vw;
-  background-color:black;
-  color: white;
-  margin: auto;
-  border-radius: 0;
+    padding: 5vh 1vw 5vh 1vw;
+}
+.bg-image {
+    min-height: 100vh;
+    background: url(/assets/pozadie.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-.card-text1 {
-  font-size: 3vw; 
-  padding: 0px 20px 0px 20px; 
-  line-height: 2vh;
+.btn-try-it-out {
+  margin: 3vh 1vw 3vh 1vw;
+  height: 8vh;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 5vw;
 }
 
-.card-text2 {
-  font-size: 3vw; 
-  line-height: 1vh; 
-  text-align: right;
-  padding: 0px 20px 0px 20px; 
- }
-
+.icon2 {
+  width: 10vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
 ion-button {
   text-transform: none;
 }
