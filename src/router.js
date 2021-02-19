@@ -12,11 +12,6 @@ const routes = [
     component: () => import ('@/plugins/app/_views/categories/Categories.vue')
   },
   {
-    path: '/categories/cards',
-    name: 'Cards',
-    component: () => import ('@/plugins/app/_views/cards/Cards.vue')
-  },
-  {
     path: '/categories/:categoryId/cards-ui',
     name: 'Cards-ui',
     component: () => import ('@/plugins/app/_views/cards/Cards-ui.vue')

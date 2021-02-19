@@ -22,7 +22,7 @@
           <ion-grid class="grid2">
             <div v-if="!loading && categories.length">
               <h2 class="select-category">Select category</h2>
-                <div v-for="category in categories" :key="category.id" @click="navToCategory(category.id)" class="a-category">
+                <div v-for="category in categories" :key="category.id" @click="navToCards(category.id)" class="a-category">
                     <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center ion-align-items-center row-category">
                       {{ category.name }}
                     </ion-row>
@@ -57,41 +57,18 @@ import {mapState} from 'vuex'
       }
     },
     async mounted(){
-      await this.$store.dispatch('loadCategories')
+      await this.$store.dispatch('offline/loadCategories')
       this.loading = false
     },
     methods: {
-      nextDeck() {
-        this.$router.push({name: 'Nextdeck'})
-      },
-      navToCategory(categoryId){
-        this.$router.push({name: 'Cards', params:{categoryId: categoryId}})
+      async navToCards(categoryId){
+        await this.$store.commit('offline/loadedCardsByCategoryId', categoryId)
+        this.$router.push({name: 'Cards-ui', params:{categoryId: categoryId}})
       }
     },
     computed: {
-      ...mapState(['categories']),
-      // categories(){
-      //   return this.$store.getters.getCategories
-      // },
-      // notDoneCategories() {
-      //   let categories = [];
-      //   let doneCategories = this.$store.getters.getDoneCategories
-      //   for (let i = 0; i <= this.categories.length - 1; i++) {
-      //     if (!doneCategories.includes(this.categories[i].id)) {
-      //       categories.push(this.categories[i])
-      //     }
-      //   }
-        
-      //   return categories
-      // }
+      ...mapState('offline', ['categories']),
     },
-    watch: {
-      // notDoneCategories(categories) {
-      //   if (!categories.length) {
-      //     this.nextDeck()
-      //   }
-      // }
-    }
   };
 </script>
 

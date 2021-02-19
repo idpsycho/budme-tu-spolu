@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router from '@/router'
+import store from '@/store'
 import baselayout from "@/plugins/app/_layout/baselayout"
 import axios from 'axios'
 
@@ -34,6 +34,7 @@ const app = createApp(App)
   .use(IonicVue)
   .use(router)
   .use(store)
+  app.mount('#app')
 
 import { registerIonicComponents } from '@/plugins/w/ionic/'
 
@@ -43,8 +44,8 @@ app.component('base-layout', baselayout)
 app.component('IonGrid', IonGrid)
 app.component('IonRow', IonRow)
 
-router.isReady().then(() => {
-  axios.get(process.env.VUE_APP_API_URL).then(response => { store.dispatch('setCampaignData', response.data) })
-  app.mount('#app')
-})
+//FIXME toto je nejaka kokotina co kazi display
+
+
+  
 

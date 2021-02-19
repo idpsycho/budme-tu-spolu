@@ -24,7 +24,7 @@
               Spolupraca
             </div>
             <div class="card-text" style="margin-top: 10vh; font-weight: bold;">
-               Vytvor svoju vlastnú kartu, ktorá by mala byť súčasťou Bratislavského balíka
+              Vytvor svoju vlastnú kartu, ktorá by mala byť súčasťou Bratislavského balíka
             </div> 
 
           </ion-col>
@@ -43,6 +43,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
+export default {
+    mounted(){
+      this.$store.dispatch('game/shuffleCards')
+    },
+    computed: {
+      ...mapState('game', {gameCards: 'shuffledCards'}),
+    },
+  };
 
 </script>
 

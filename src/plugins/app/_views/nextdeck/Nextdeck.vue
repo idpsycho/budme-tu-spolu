@@ -33,13 +33,6 @@ export default {
   components: {
 
   },
-
-  methods: {
-   Continue() {
-      this.$store.dispatch("eraseData")
-      this.$router.push({name: 'Landing'})
-    }
-  },
 };
 </script>
 
