@@ -29,7 +29,7 @@
             <div class="text2">
               BTT will get you out of your comfort zone. Play on your own, engage with your surroundings, learn something and meet new people
             </div>
-            <ion-button class="btn-try-it-out" color="dark" expand="block">Try it out!</ion-button>
+            <ion-button class="btn-try-it-out" color="dark" expand="block" @click="$router.push({name:'Categories'})">Try it out!</ion-button>
             <img class="icon2" src="/assets/icon/caret-down.png">
           </ion-col>
         </ion-row>

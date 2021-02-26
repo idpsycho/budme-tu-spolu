@@ -34,7 +34,7 @@
         </ion-row>
         <ion-row>
           <ion-col size="12" style="height: 10vh; text-align: center;">
-            <button style="background: rgba(0,0,0,0); width: 70%; height: 80%;"> 1/15 </button>
+            <button style="background: rgba(0,0,0,0); width: 70%; height: 80%;"> 1/{{gameCards.length}} </button>
           </ion-col>
         </ion-row>
       </div>
@@ -47,7 +47,8 @@ import { mapState } from 'vuex';
 
 export default {
     mounted(){
-      this.$store.dispatch('game/shuffleCards')
+      this.$store.dispatch('game/shuffleCardsFromCategory', this.$route.params.categoryId)
+      console.log(this.gameCards);
     },
     computed: {
       ...mapState('game', {gameCards: 'shuffledCards'}),

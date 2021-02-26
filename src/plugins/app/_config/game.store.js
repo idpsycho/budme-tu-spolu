@@ -7,14 +7,15 @@ export default {
         shuffledCards: []
     },
     mutations: {
-        cardsShuffled(state, rootState) {
-            console.log(rootState);
-            state.shuffledCards = shuffle(rootState.cards)                    
+        cardsShuffled(state, { cards, categoryId }) {
+            const categoryCards = cards.filter(card => card.category.id == categoryId)
+            state.shuffledCards = shuffle(categoryCards)                    
         }
     },
     actions: {
-        shuffleCards({commit, rootState}) {
+        shuffleCardsFromCategory({ commit, rootState }, categoryId) {
             console.log(rootState.offline);
+            commit('cardsShuffled', {cards: rootState.offline.cards, categoryId: categoryId})
         }
         
     }

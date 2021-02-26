@@ -20,16 +20,13 @@
             </ion-row>
           </ion-grid>
           <ion-grid class="grid2">
-            <div v-if="!loading && categories.length">
+            <div v-if="categories.length">
               <h2 class="select-category">Select category</h2>
                 <div v-for="category in categories" :key="category.id" @click="navToCards(category.id)" class="a-category">
                     <ion-row :style="{'background-color':  category.color }" class="ion-justify-content-center ion-align-items-center row-category">
                       {{ category.name }}
                     </ion-row>
                 </div>
-            </div>
-            <div v-else-if="loading" class="ion-text-center ion-margin ion-padding">
-              <ion-spinner></ion-spinner>
             </div>
             <div v-else  class="ion-text-center ion-margin ion-padding">
               <h2 class="select-category">No categories found</h2>
@@ -51,18 +48,8 @@ import axios from 'axios'
 import {mapState} from 'vuex'
 
   export default {
-    data(){
-      return{
-        loading: true
-      }
-    },
-    async mounted(){
-      await this.$store.dispatch('offline/loadCategories')
-      this.loading = false
-    },
     methods: {
       async navToCards(categoryId){
-        await this.$store.commit('offline/loadedCardsByCategoryId', categoryId)
         this.$router.push({name: 'Cards-ui', params:{categoryId: categoryId}})
       }
     },

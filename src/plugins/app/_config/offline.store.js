@@ -14,17 +14,13 @@ export default {
         cardsLoaded(state, cards) {
             state.cards = cards
         }
-        // loadedCardsByCategoryId(state, categoryId) {
-        //     console.log(state.categories);
-        //     state.cards = state.categories.filter(category => category.id == categoryId).cards
-        // }
     },
     actions: {
         async loadCategories({ commit }) {
             const categories = []
             let cardsData = []
 
-            //Should try to load from server if it fails it should load from storage
+            //Tries to load from server if it fails it should load from storage
             try {
                 const { data: { data: { cards } } } = await axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/campaign/tag/BEENTHERETOGETHER')
                 cardsData = cards

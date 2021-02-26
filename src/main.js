@@ -44,8 +44,3 @@ app.component('base-layout', baselayout)
 app.component('IonGrid', IonGrid)
 app.component('IonRow', IonRow)
 
-//FIXME toto je nejaka kokotina co kazi display
-
-
-  
-

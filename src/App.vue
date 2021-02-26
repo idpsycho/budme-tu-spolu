@@ -1,16 +1,38 @@
+<!-- Handles browser refresh -->
 <template>
   <ion-app>
-    <ion-router-outlet />
+    <ion-router-outlet v-if="!loading" />
+    <div class="loader" v-else>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
   </ion-app>
 </template>
 
 <script>
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import { IonApp, IonRouterOutlet, IonSpinner } from '@ionic/vue';
 
 export default {
   components: {
     IonApp,
     IonRouterOutlet
+  },
+  data(){
+    return{
+      loading: true
+    }
+  },
+  async mounted(){
+    await this.$store.dispatch('offline/loadCategories')
+    this.loading = false
   }
 }
 </script>
+<style scoped>
+.loader{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFDB2C;
+}
+</style>
