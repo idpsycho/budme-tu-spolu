@@ -71,7 +71,7 @@
              <div class="feed-style-text">
               <div>
               <h5 class="feed-style-text-main-text font" style="background-color: #FFDB2C;" >Enjoyed playing an awesome game. Project of my friend, makes you interact with surroudings! #beentheretogether</h5>
-              <ion-row class="feed-text">
+              <ion-row class="feed-text-only">
                 <ion-col size="6">
                   <h6 class="feed-date font">Dec 12, 2021 16:45</h6>
                 </ion-col>
@@ -205,6 +205,13 @@ width: 100vw;
   border-radius: 0px 0px 15px 15px;
 }
 
+.feed-text-only {
+  padding: 4vh 3vw 1vh 3vw;
+  border: 2px solid black;
+  border-top: none;
+  border-radius: 0px 0px 15px 15px;
+}
+
 .feed-icon {
     height: 6vw;
     margin-top: 6vw;
@@ -247,7 +254,7 @@ width: 100vw;
   font-size: 5vw;
   font-weight: 500;
   color:black;
-  margin-bottom: -8vh;
+  margin-bottom: -4vh;
   z-index: 999;
 }
 ion-button {
