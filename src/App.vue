@@ -14,7 +14,8 @@ import { IonApp, IonRouterOutlet, IonSpinner } from '@ionic/vue';
 export default {
   components: {
     IonApp,
-    IonRouterOutlet
+    IonRouterOutlet,
+    IonSpinner
   },
   data(){
     return{
@@ -22,7 +23,7 @@ export default {
     }
   },
   async mounted(){
-    await this.$store.dispatch('offline/loadCategories')
+    await this.$store.dispatch('offline/loadCampainCategories')
     this.loading = false
   }
 }

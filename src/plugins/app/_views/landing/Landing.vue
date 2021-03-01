@@ -1,5 +1,10 @@
 <template>
   <ion-page>
+    <div v-show="shownCard.isShowing">
+      <card :card="shownCard.cardData" style="z-index: 10; position: absolute; top: 10%"/>
+      <ion-button class="close-card-button" @click="shownCard.isShowing = false">Close card</ion-button>
+      <ion-backdrop></ion-backdrop>
+    </div>
     <ion-content class="has-header">
       <ion-grid class="bg-image">
         <ion-toolbar class="header">
@@ -39,61 +44,69 @@
             
             <!-- Feed s obrazkom -->
 
-            <div class="feed-style-image">
-              <img class="feed-img" src="/assets/test-feed.jpg">
-              <div class="feed-text">
-              <h5 class="feed-text-main font" >#beentheretogether is a single-player game that challenges you to step out of your comfort zone and get to know people and spaces in your city: http://bit.ly/2TV7wA3</h5>
-              <ion-row>
-                <ion-col size="6">
-                  <h6 class="feed-date font">Dec 12, 2021 16:45</h6>
-                </ion-col>
-                <ion-col size="2" style="text-align: right;">
-                  <div>
-                    <img class="feed-icon" src="/assets/icon/share.png">
-                  </div>
-                </ion-col>
-                <ion-col size="4">
-                  <button class="feed-button">
-                  <ion-row>
-                    <img src="/assets/icon/eye.png" class="feed-eye">
-                    <div class="feed-btn-text">
-                      Card
+            <span v-if="!loading && posts.length">
+              <div class="feed-style-image" v-for="post in postsWithPhoto" :key="post.id">
+                <img class="feed-img" :src="post.image.path">
+                <div class="feed-text">
+                <h5 class="feed-text-main font" >{{post.caption}}</h5>
+                <ion-row>
+                  <ion-col size="6">
+                    <h6 class="feed-date font">{{formatDate(post.created_at)}}</h6>
+                  </ion-col>
+                  <ion-col size="2" style="text-align: right;">
+                    <div>
+                      <img class="feed-icon" src="/assets/icon/share.png">
                     </div>
-                  </ion-row>
-                  </button>
-                </ion-col>
-              </ion-row>
+                  </ion-col>
+                  <ion-col size="4">
+                    <button class="feed-button">
+                    <ion-row>
+                      <img src="/assets/icon/eye.png" class="feed-eye">
+                      <div class="feed-btn-text" @click="showCard(post.card)">
+                        Card
+                      </div>
+                    </ion-row>
+                    </button>
+                  </ion-col>
+                </ion-row>
+                </div>
               </div>
-            </div>
-
-             <!-- Feed iba s textom -->
-
-             <div class="feed-style-text">
-              <div>
-              <h5 class="feed-style-text-main-text font" style="background-color: #FFDB2C;" >Enjoyed playing an awesome game. Project of my friend, makes you interact with surroudings! #beentheretogether</h5>
-              <ion-row class="feed-text">
-                <ion-col size="6">
-                  <h6 class="feed-date font">Dec 12, 2021 16:45</h6>
-                </ion-col>
-                <ion-col size="2" style="text-align: right;">
-                  <div>
-                    <img class="feed-icon" src="/assets/icon/share.png">
-                  </div>
-                </ion-col>
-                <ion-col size="4">
-                  <button class="feed-button">
-                  <ion-row>
-                    <img src="/assets/icon/eye.png" class="feed-eye">
-                    <div class="feed-btn-text">
-                      Card
+  
+               <!-- Feed iba s textom -->
+  
+               <div class="feed-style-text" v-for="post in postsWithoutPhoto" :key="post.id"> 
+                <div>
+                <h5 class="feed-style-text-main-text font" :style="`background-color: ${post.card.category.color};`" >{{post.caption}}</h5>
+                <ion-row class="feed-text">
+                  <ion-col size="6">
+                    <h6 class="feed-date font">{{formatDate(post.created_at)}}</h6>
+                  </ion-col>
+                  <ion-col size="2" style="text-align: right;">
+                    <div>
+                      <img class="feed-icon" src="/assets/icon/share.png">
                     </div>
-                  </ion-row>
-                  </button>
-                </ion-col>
-              </ion-row>
+                  </ion-col>
+                  <ion-col size="4">
+                    <button class="feed-button">
+                    <ion-row>
+                      <img src="/assets/icon/eye.png" class="feed-eye">
+                      <div class="feed-btn-text" @click="showCard(post.card)">
+                        Card
+                      </div>
+                    </ion-row>
+                    </button>
+                  </ion-col>
+                </ion-row>
+                </div>
               </div>
+            </span>
+            <div v-else-if="loading" class="ion-text-center">
+              <ion-spinner></ion-spinner>
+              <p>Loading posts...</p>
             </div>
-
+            <div class="ion-text-center" v-else>
+              <p>No posts found</p>
+            </div>
         </ion-col>
       </ion-grid>
     </ion-content>
@@ -101,13 +114,65 @@
 </template>
 
 <script>
+import axios from 'axios';
+import moment from 'moment'
 
+import Card from '@/plugins/app/_components/card.vue'
+
+
+export default {
+  components: {Card},
+  data(){
+    return{
+      posts: [],
+      shownCard: {
+        cardData: {},
+        isShowing: false
+      },
+      loading: true
+    }
+  },
+  mounted(){
+    this._loadPosts()
+  },
+  methods:{
+    async _loadPosts(){
+
+      try {
+        const {data: {data}} = await axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/feeds')
+        this.posts = data
+        console.log(this.posts)
+      } catch (error) {
+        console.error(error);
+      }
+
+      this.loading = false;
+    },
+    showCard(card){
+      this.shownCard.cardData = card
+      this.shownCard.isShowing = true
+    },
+    formatDate(dateString){
+      return moment(dateString).format('MMM DD YYYY hh:mm')
+    }
+  },
+  computed:{
+    postsWithPhoto(){
+      return this.posts.filter(post => post.image != null)
+    },
+    postsWithoutPhoto(){
+      return this.posts.filter(post => post.image == null)
+    }
+  }
+}
 </script>
 
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
-
+ion-backdrop {
+      opacity: 0.6;
+    }
 .logo {
   font-size: 4vw;
   color: black;
@@ -254,6 +319,14 @@ ion-button {
   text-transform: none;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 700;
-  
+}
+.close-card-button{
+  position: absolute;
+  --background: black;
+  height: 64px;
+  z-index: 10;
+  bottom: 12%;
+  width: 90%;
+  margin-left: 19px;
 }
  </style>

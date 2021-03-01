@@ -5,7 +5,7 @@ import {
     IonIcon, IonList, IonTitle, IonMenu, IonRouterOutlet, IonMenuButton, IonSegment, IonSegmentButton, IonVirtualScroll,
     IonTextarea, IonSearchbar, IonRefresherContent, IonRefresher, IonInfiniteScrollContent, IonInfiniteScroll, IonAvatar,
     IonModal, IonRadioGroup, IonRadio, IonNote, IonCard, IonCardContent, IonTabBar, IonTabButton, IonMenuToggle, IonFab,
-    IonFabButton, IonReorderGroup, IonReorder, IonFabList, IonSelect, IonSelectOption, IonToggle, IonImg, IonSpinner,
+    IonFabButton, IonReorderGroup, IonReorder, IonFabList, IonSelect, IonSelectOption, IonToggle, IonImg, IonSpinner, IonBackdrop,
 } from '@ionic/vue'
 
 // import { App } from 'vue'
@@ -65,6 +65,7 @@ export const registerIonicComponents = (app) => {
     app.component('ion-toggle', IonToggle)
     app.component('ion-img', IonImg)
     app.component('ion-spinner', IonSpinner)
+    app.component('ion-backdrop', IonBackdrop)
     
     
 }
