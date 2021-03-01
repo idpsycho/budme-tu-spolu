@@ -26,6 +26,11 @@ const routes = [
     name: 'Nextdeck',
     component: () => import ('@/plugins/app/_views/nextdeck/Nextdeck.vue')
   },
+  {
+    path: '/info',
+    name: 'Info',
+    component: () => import ('@/plugins/app/_views/landing/Info.vue')
+  },
 ]
 
 const router = createRouter({
