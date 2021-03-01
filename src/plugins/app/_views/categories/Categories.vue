@@ -15,7 +15,7 @@
         </ion-row>
             <div class="select-category">Select category</div>
             <ion-slides pager="true" :options="slideOpts" @ionSlideTransitionStart="setActiveCategory">
-              <ion-slide v-for="(category, i) in categories" :key="category.id" @click="navToCards(category.id)">
+              <ion-slide v-for="(category, i) in unplayedCategories" :key="category.id" @click="navToCards(category.id)">
                   <div class="custom-card" :style="`background-color: ${category.color};`">
                       <ion-row>
                         <ion-col size="8">
@@ -66,12 +66,13 @@ export default {
     }
   },
   mounted(){
-    this.activeCategory = this.categories[0]
+    if(!this.unplayedCategories.length) this.$store.commit('game/allCategoriesFinished')
+    this.activeCategory = this.unplayedCategories[0]
   },
   methods: {
     setActiveCategory(e){
       //FIXME neviem ci toto je best solution mal by fungovat getActiveIndex() ale ludia sa stazuju ze nefunguje a ani mne nefunguje cize idk zatial toto ide
-      this.activeCategory = this.categories[e.target.swiper.snapIndex]
+      this.activeCategory = this.unplayedCategories[e.target.swiper.snapIndex]
     },
     async navToCards(categoryId){
       this.$router.push({name: 'Cards-ui', params:{categoryId: categoryId}})
@@ -79,6 +80,11 @@ export default {
   },
   computed: {
     ...mapState('offline', ['categories']),
+    ...mapState('game', ['finishedCategories']),
+    
+    unplayedCategories(){
+      return this.categories.filter(category => !this.finishedCategories.includes(`${category.id}`))
+    }
   },
 };
 

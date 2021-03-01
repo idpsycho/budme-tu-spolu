@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <div v-show="shownCard.isShowing">
-      <card :card="shownCard.cardData" style="z-index: 10; position: absolute; top: 10%"/>
+      <card class="card-preview" :card="shownCard.cardData"/>
       <ion-button class="close-card-button" @click="shownCard.isShowing = false">Close card</ion-button>
       <ion-backdrop></ion-backdrop>
     </div>
@@ -72,9 +72,9 @@
                 </div>
               </div>
   
-               <!-- Feed iba s textom -->
+              <!-- Feed iba s textom -->
   
-               <div class="feed-style-text" v-for="post in postsWithoutPhoto" :key="post.id"> 
+              <div class="feed-style-text" v-for="post in postsWithoutPhoto" :key="post.id"> 
                 <div>
                 <h5 class="feed-style-text-main-text font" :style="`background-color: ${post.card.category.color};`" >{{post.caption}}</h5>
                 <ion-row class="feed-text-only">
@@ -172,7 +172,21 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 ion-backdrop {
       opacity: 0.6;
-    }
+}
+.card-preview{
+  z-index: 10;
+  position: absolute;
+  top: 10%;
+}
+.close-card-button{
+  position: absolute;
+  --background: black;
+  height: 64px;
+  z-index: 10;
+  bottom: 12%;
+  width: 90%;
+  margin-left: 19px;
+}
 .logo {
   font-size: 4vw;
   color: black;
@@ -327,13 +341,5 @@ ion-button {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 700;
 }
-.close-card-button{
-  position: absolute;
-  --background: black;
-  height: 64px;
-  z-index: 10;
-  bottom: 12%;
-  width: 90%;
-  margin-left: 19px;
-}
+
  </style>

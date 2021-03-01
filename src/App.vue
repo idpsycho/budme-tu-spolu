@@ -1,7 +1,7 @@
 <!-- Handles browser refresh -->
 <template>
   <ion-app>
-    <ion-router-outlet v-if="!loading" />
+    <ion-router-outlet v-if="!loading" :key="$route.fullPath"/>
     <div class="loader" v-else>
       <ion-spinner name="crescent"></ion-spinner>
     </div>
