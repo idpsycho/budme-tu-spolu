@@ -44,3 +44,8 @@ app.component('base-layout', baselayout)
 app.component('IonGrid', IonGrid)
 app.component('IonRow', IonRow)
 
+//Camera
+import { defineCustomElements } from '@ionic/pwa-elements/loader'
+defineCustomElements(window);
+
+

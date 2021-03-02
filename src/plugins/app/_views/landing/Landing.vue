@@ -141,7 +141,6 @@ export default {
       try {
         const {data: {data}} = await axios.get('https://budme-tu-spolu-admin.hybridlab.dev/api/v1/feeds')
         this.posts = data
-        console.log(this.posts)
       } catch (error) {
         console.error(error);
       }
@@ -177,6 +176,7 @@ ion-backdrop {
   z-index: 10;
   position: absolute;
   top: 10%;
+  width: 90%;
 }
 .close-card-button{
   position: absolute;

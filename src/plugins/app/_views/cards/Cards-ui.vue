@@ -7,27 +7,27 @@
               BEEN<br />THERE<br />TOGETHER
             </div>
             <div class="icons-wrapper">
-              <ion-icon :icon="addCircleOutline"></ion-icon>
+              <ion-icon :icon="addCircleOutline" @click="openShareModal"></ion-icon>
               <ion-icon :icon="closeOutline" @click="$router.push({name: 'Categories'})"></ion-icon>
             </div>
         </div>
         
-        <div v-if="!cycledAllCards">
+        <div v-if="!cycledAllCategories">
           <card v-for="(card, i) in playingCards" :key="card.id" :card="card" :countString="`${i+1}/${playingCards.length}`" v-show="i == activeCardIndex"/>
           <div class="footer">
             <ion-icon :icon="playForwardCircle" @click="skipCard"></ion-icon>
             <ion-icon :icon="informationCircleOutline" :class="{disabledIcon: !hasStoryBehind}" @click="openStoryBehind"></ion-icon>
-            <ion-icon :icon="checkmarkCircle" @click="completeCard"></ion-icon>
+            <ion-icon :icon="checkmarkCircle" @click="nextStep"></ion-icon>
           </div>
         </div>
         <div v-else class="cards-finished-wrapper ion-text-center">
           <h1>Deck finished</h1>
           <div class="middle-buttons">
-            <ion-button @click="finishCurrentCategory">Switch category</ion-button>
+            <!-- <ion-button @click="finishCurrentCategory">Switch category</ion-button> -->
             <ion-button @click="playSkippedCards" :disabled="!gameSkippedCards.length">Play skipped cards</ion-button>
-            <ion-button @click="resetCurrentGame">Shuffle new deck</ion-button>
+            <ion-button @click="$router.push({name: 'Categories'})">Shuffle new deck</ion-button>
           </div>
-          <ion-button class="bottom-btn" :style="`color: ${categoryColor}`">Share your experience</ion-button>
+          <!-- <ion-button class="bottom-btn" :style="`color: ${categoryColor}`">Share your experience</ion-button> -->
         </div>
       </div>
   </ion-content>
@@ -41,6 +41,7 @@ import { modalController } from '@ionic/vue';
 
 import Card from '@/plugins/app/_components/card.vue'
 import StoryBehind from '@/plugins/app/_components/story-behind.vue'
+import Share from '@/plugins/app/_components/share.vue'
 
 export default {
     components:{ Card },
@@ -64,12 +65,31 @@ export default {
       this.$store.dispatch('game/shuffleCardsFromCategory', this.$route.params.categoryId)
     },
     methods:{
-      completeCard(){
+      nextStep(){
         this.activeCardIndex++
+
+        if(this.playingSkipped) return
+
+        if(!this.cycledAllCategories && this.activeCardIndex+1 > this.gameCards.length){
+          this.$store.commit('game/categoryFinished', this.$route.params.categoryId)
+        }
+        if(!this.cycledAllCategories && this.activeCardIndex+1 > this.gameCards.length){
+          this.$router.push({name: 'Categories'})
+        }
       },
       skipCard(){
         this.$store.commit('game/cardSkipped', this.playingCards[this.activeCardIndex])
-        this.activeCardIndex++
+        this.nextStep()
+      },
+      async openShareModal(){
+        const modal = await modalController
+          .create({
+            component: Share,
+            componentProps: {
+              card: this.playingCards[this.activeCardIndex]
+            },
+          })
+        return modal.present();
       },
       async openStoryBehind(){
         if(!this.hasStoryBehind) return
@@ -82,15 +102,7 @@ export default {
           })
         return modal.present();
       },
-      finishCurrentCategory(){
-        this.$store.commit('game/categoryFinished', this.$route.params.categoryId)
-        this.$router.push({name: 'Categories'})
-      },
-      async resetCurrentGame(){
-        this.playingSkipped = false
-        await this.$store.dispatch('game/shuffleCardsFromCategory', this.$route.params.categoryId)
-        this.activeCardIndex = 0
-      },
+      
       playSkippedCards(){
         //save skipped cards into component state and reset store cards for recursive behaviour
         this.playingSkipped = false //triggers computed if action is repeated 
@@ -102,7 +114,7 @@ export default {
       }
     },
     computed: {
-      ...mapState('game', {gameCards: 'shuffledCards', gameSkippedCards: 'skippedCards'}),
+      ...mapState('game', {gameCards: 'shuffledCards', gameSkippedCards: 'skippedCards', gameFinishedCategories: 'finishedCategories'}),
       ...mapState('offline', {offlineCategories: 'categories'}),
       
       playingCards(){
@@ -111,11 +123,11 @@ export default {
       categoryColor(){
         return this.offlineCategories.filter(category => category.id == this.$route.params.categoryId)[0]?.color
       },
-      cycledAllCards(){
-        return this.playingCards.length == this.activeCardIndex
+      cycledAllCategories(){
+        return (this.playingCards.length == this.activeCardIndex) && !(this.offlineCategories.filter(category => !this.gameFinishedCategories.includes(`${category.id}`)).length)
       },
       hasStoryBehind(){
-        return !!this.playingCards[this.activeCardIndex].story_text.length
+        return !!this.playingCards[this.activeCardIndex]?.story_text.length
       }
     },
   };

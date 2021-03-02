@@ -2,8 +2,8 @@
     <div class="wrapper" :style="`background: ${card.story_color};`">
         <img v-if="card.story_picture" :src="card.story_picture.path">
         <h2>{{card.story_text}}</h2>
-        <div class="close-icon">
-            <ion-icon :icon="closeCircleOutline" @click="closeStory"></ion-icon>
+        <div class="close-icon" >
+            <ion-icon :style="`color: ${card.category.color};`" :icon="closeCircleOutline" @click="closeStory"></ion-icon>
         </div>
     </div>
 </template>
@@ -55,7 +55,6 @@ export default {
 .close-icon{
     position: absolute;
     bottom: 5%;
-    color: #FFDB2C;
     font-size: 40px;
     margin-left: auto;
     margin-right: auto;
