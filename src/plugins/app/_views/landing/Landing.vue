@@ -15,7 +15,7 @@
             </div>
           </ion-col>
           <ion-col size="2" style="text-align: right;">
-            <div>
+            <div @click="$router.push({name: 'Info'})">
               <img class="icon-header" src="/assets/icon/question.png">
             </div>
           </ion-col>
