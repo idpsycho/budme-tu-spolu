@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" :style="`background: ${card.story_color};`">
-        <img src="https://media.gq.com/photos/5df00d5bd0a40200081edefa/3:2/w_1686,h_1124,c_limit/SHORTY-final-i-hope.jpg">
+        <img v-if="card.story_picture" :src="card.story_picture.path">
         <h2>{{card.story_text}}</h2>
         <div class="close-icon">
             <ion-icon :icon="closeCircleOutline" @click="closeStory"></ion-icon>
