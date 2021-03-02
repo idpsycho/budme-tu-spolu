@@ -16,7 +16,7 @@ export default {
         }
     },
     actions: {
-        async loadCategories({ commit }) {
+        async loadCampainCategories({ commit }) {
             const categories = []
             let cardsData = []
 
