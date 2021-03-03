@@ -68,7 +68,7 @@ export default {
             })
             modal.present();
             const {data} = await modal.onDidDismiss()
-            if(data.postShared) this.closeModal()
+            if(data.postShared) modalController.dismiss({postShared: true})
 
         },
     }

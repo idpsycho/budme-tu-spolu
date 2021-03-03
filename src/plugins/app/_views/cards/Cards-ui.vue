@@ -7,7 +7,8 @@
               BEEN<br />THERE<br />TOGETHER
             </div>
             <div class="icons-wrapper">
-              <ion-icon :icon="addCircleOutline" @click="openShareModal"></ion-icon>
+              <ion-icon v-if="!cardShared" :icon="addCircleOutline" @click="openShareModal"></ion-icon>
+              <ion-icon v-else></ion-icon>
               <ion-icon :icon="closeOutline" @click="$router.push({name: 'Categories'})"></ion-icon>
             </div>
         </div>
@@ -58,7 +59,8 @@ export default {
     data(){
       return{
         activeCardIndex: 0,
-        playingSkipped: false
+        playingSkipped: false,
+        cardShared: false
       }
     },
     mounted(){
@@ -89,7 +91,9 @@ export default {
               card: this.playingCards[this.activeCardIndex]
             },
           })
-        return modal.present();
+        modal.present();
+        const {data} = await modal.onDidDismiss()
+        if(data?.postShared) this.cardShared = true
       },
       async openStoryBehind(){
         if(!this.hasStoryBehind) return
@@ -101,6 +105,7 @@ export default {
             },
           })
         return modal.present();
+        
       },
       
       playSkippedCards(){
